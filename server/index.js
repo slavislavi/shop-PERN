@@ -14,7 +14,7 @@ const start = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
-        app.listen(PORT, () => console.log(`===[ Server run on port ${PORT} ]===`));
+        app.listen(PORT, () => console.log(`[[ Server run on port ${PORT} ]]`));
     } catch (e) {
         console.log(e);
     }
