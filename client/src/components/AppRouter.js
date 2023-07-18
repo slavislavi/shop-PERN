@@ -6,7 +6,7 @@ import { getIsAuth } from '../store/selectors/userSelectors';
 
 const AppRouter = () => {
     const isAuth = useSelector(getIsAuth);
-    console.log(isAuth);
+
     return (
         <Routes>
             {isAuth && authRoutes.map(({ path, element }) =>
