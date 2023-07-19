@@ -14,14 +14,14 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <NavLink to={SHOP_ROUTE} style={{ color: 'white' }}>Shop PERN</NavLink>
+                <NavLink to={SHOP_ROUTE} style={{ color: "white" }}>Shop PERN</NavLink>
                 {isAuth ?
-                    <Nav className="ml-auto" style={{ color: 'white' }}>
+                    <Nav className="ml-auto" style={{ color: "white" }}>
                         <Button variant="outline-light">Admin Panel</Button>
                         <Button variant="outline-light" className="ms-2">Log Out</Button>
                     </Nav>
                     :
-                    <Nav className="ml-auto" style={{ color: 'white' }}>
+                    <Nav className="ml-auto" style={{ color: "white" }}>
                         <Button variant="outline-light">Log In</Button>
                     </Nav>
                 }
