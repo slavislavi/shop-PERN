@@ -1,11 +1,12 @@
-import React, { useSelector } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { getIsAuth } from '../store/selectors/userSelectors';
 import { SHOP_ROUTE } from '../utils/constants';
+import { getIsAuth } from '../store/selectors/userSelectors';
 
 const NavBar = () => {
     const isAuth = useSelector(getIsAuth);
@@ -17,7 +18,7 @@ const NavBar = () => {
                 {isAuth ?
                     <Nav className="ml-auto" style={{ color: 'white' }}>
                         <Button variant="outline-light">Admin Panel</Button>
-                        <Button variant="outline-light" className="ml-2">Log Out</Button>
+                        <Button variant="outline-light" className="ms-2">Log Out</Button>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{ color: 'white' }}>
