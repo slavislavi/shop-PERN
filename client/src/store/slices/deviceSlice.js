@@ -6,6 +6,7 @@ const initialState = {
         { id: 2, name: 'Laptop' },
         { id: 3, name: 'Fridge' },
     ],
+    selectedType: {},
     brands: [
         { id: 1, name: 'Samsung' },
         { id: 2, name: 'LG' },
@@ -31,6 +32,9 @@ export const deviceSlice = createSlice({
         },
         setDevices: (state, action) => {
             state.devices = action.payload;
+        },
+        setSelectedType: (state, action) => {
+            state.selectedType = action.payload;
         },
     },
 });
