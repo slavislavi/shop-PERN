@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDevices } from '../store/selectors/deviceSelectors';
 import Row from 'react-bootstrap/Row';
+import DeviceItem from './DeviceItem';
 
 const DeviceList = () => {
     const devices = useSelector(getDevices);
@@ -10,9 +11,7 @@ const DeviceList = () => {
     return (
         <Row className="d-flex">
             {devices.map((device) =>
-                <div>
-
-                </div>
+                <DeviceItem key={device.id} device={device} />
             )}
         </Row>
     );
