@@ -40,6 +40,17 @@ const DevicePage = () => {
                     </Card>
                 </Col>
             </Row>
+            <Row className="d-flex flex-column m-3">
+                <h1>Details:</h1>
+                {description.map((info, index) =>
+                    <Row
+                        key={info.id}
+                        style={{ background: !(index % 2) && "lightgray", padding: 10 }}
+                    >
+                        {info.title}: {info.description}
+                    </Row>
+                )}
+            </Row>
         </Container>
     );
 };
