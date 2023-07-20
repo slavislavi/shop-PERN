@@ -15,6 +15,7 @@ const TypeBar = () => {
         <ListGroup>
             {types.map((type) =>
                 <ListGroup.Item
+                    style={{ cursor: "pointer" }}
                     active={type.id === selectedType.id}
                     key={type.id}
                     onClick={selectTypeHandler(type)}
