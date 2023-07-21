@@ -16,10 +16,9 @@ const Auth = () => {
     const navigate = useNavigate();
     const isLoginPage = location.pathname === LOGIN_ROUTE;
 
-    const inputEmailHandler = (e) => setEmail(e.target.value);
-    const inputPasswordHandler = (e) => setPassword(e.target.value);
-
-    const submitAuth = async () => {
+    const onChangeEmail = (e) => setEmail(e.target.value);
+    const onChangePassword = (e) => setPassword(e.target.value);
+    const onSubmitAuth = async () => {
         try {
             let user;
             if (isLoginPage) {
@@ -47,14 +46,14 @@ const Auth = () => {
                         className="mt-3"
                         placeholder="Enter email..."
                         value={email}
-                        onChange={inputEmailHandler}
+                        onChange={onChangeEmail}
                     />
                     <Form.Control
                         className="mt-3"
                         placeholder="Enter password..."
                         type="password"
                         value={password}
-                        onChange={inputPasswordHandler}
+                        onChange={onChangePassword}
                     />
                     <Row className="d-flex justify-content-between mt-3 ps-3 pe-3">
                         {isLoginPage ?
@@ -69,7 +68,7 @@ const Auth = () => {
                         <Button
                             variant="outline-success"
                             style={{ width: "auto" }}
-                            onClick={submitAuth}
+                            onClick={onSubmitAuth}
                         >
                             {isLoginPage ? "Sign In" : "Register"}
                         </Button>
