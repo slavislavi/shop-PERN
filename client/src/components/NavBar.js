@@ -13,6 +13,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const toAdminPanelHandler = () => navigate(ADMIN_ROUTE);
+    const toLoginPageHandler = () => navigate(LOGIN_ROUTE);
     const logoutHandler = () => navigate(LOGIN_ROUTE);
 
     return (
@@ -35,7 +36,12 @@ const NavBar = () => {
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{ color: "white" }}>
-                        <Button variant="outline-light">Log In</Button>
+                        <Button
+                            variant="outline-light"
+                            onClick={toLoginPageHandler}
+                        >
+                            Log In
+                        </Button>
                     </Nav>
                 }
             </Container>

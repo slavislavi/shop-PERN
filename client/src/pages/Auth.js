@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
-import { NavLink, useLocation } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/constants';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/constants';
+import { login, registration } from '../http/userApi';
+import { userActions } from '../store/slices/userSlice';
 
 const Auth = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+
     const location = useLocation();
+    const navigate = useNavigate();
     const isLoginPage = location.pathname === LOGIN_ROUTE;
+
+    const inputEmailHandler = (e) => setEmail(e.target.value);
+    const inputPasswordHandler = (e) => setPassword(e.target.value);
+
+    const submitAuth = async () => {
+        try {
+            let user;
+            if (isLoginPage) {
+                user = await login(email, password);
+            } else {
+                user = await registration(email, password);
+            }
+            dispatch(userActions.setUser(user));
+            dispatch(userActions.setIsAuth(true));
+            navigate(SHOP_ROUTE);
+        } catch (e) {
+            alert(e.response.data.message);
+        }
+    };
 
     return (
         <Container
@@ -18,10 +46,15 @@ const Auth = () => {
                     <Form.Control
                         className="mt-3"
                         placeholder="Enter email..."
+                        value={email}
+                        onChange={inputEmailHandler}
                     />
                     <Form.Control
                         className="mt-3"
                         placeholder="Enter password..."
+                        type="password"
+                        value={password}
+                        onChange={inputPasswordHandler}
                     />
                     <Row className="d-flex justify-content-between mt-3 ps-3 pe-3">
                         {isLoginPage ?
@@ -36,6 +69,7 @@ const Auth = () => {
                         <Button
                             variant="outline-success"
                             style={{ width: "auto" }}
+                            onClick={submitAuth}
                         >
                             {isLoginPage ? "Sign In" : "Register"}
                         </Button>
