@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/bigStar.png';
+import cart from '../assets/cart.png';
 
 const DevicePage = () => {
     const device = { id: 1, name: 'Apple iphone 14 pro', price: 1400, rating: 5, img: 'https://img.5element.by/import/images/ut/goods/good_077c5dc7-06a8-11ee-bb93-005056012465/-1_600.jpg' };
@@ -36,7 +37,12 @@ const DevicePage = () => {
                         style={{ width: 300, height: 300, fontSize: 32, border: "5px solid lightgray" }}
                     >
                         <h3>{device.price} $</h3>
-                        <Button variant="outline-dark">Add to cart</Button>
+                        <Row className="d-flex">
+                            <Button variant="outline-dark" style={{ width: "auto" }}>
+                                Add to cart
+                            </Button>
+                            <Image src={cart} width={50} height={50} style={{ width: "auto" }} />
+                        </Row>
                     </Card>
                 </Col>
             </Row>
