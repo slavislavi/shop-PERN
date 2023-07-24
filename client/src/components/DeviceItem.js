@@ -12,7 +12,11 @@ const DeviceItem = ({ device }) => {
     return (
         <Col md={3} className="mt-3" onClick={toDeviceDetailsHandler}>
             <Card style={{ cursor: "pointer", width: 150 }} border="light">
-                <Image width={150} height={150} src={device.img} />
+                <Image
+                    width={150}
+                    height={150}
+                    src={process.env.REACT_APP_API_URL + device.img}
+                />
                 <div className="d-flex mt-1 justify-content-between align-items-center">
                     <div className="text-black-50">Samsung</div>
                     <div className="d-flex align-items-center">

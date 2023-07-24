@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import TypeBar from '../components/TypeBar';
 import BrandBar from '../components/BrandBar';
 import DeviceList from '../components/DeviceList';
-import { fetchBrands, fetchTypes } from '../http/deviceApi';
+import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 
 const Shop = () => {
@@ -15,6 +15,7 @@ const Shop = () => {
     useEffect(() => {
         fetchTypes().then((data) => dispatch(deviceActions.setTypes(data)));
         fetchBrands().then((data) => dispatch(deviceActions.setBrands(data)));
+        fetchDevices().then((data) => dispatch(deviceActions.setDevices(data.rows)));
     }, []);
 
     return (
