@@ -18,6 +18,7 @@ const Auth = () => {
 
     const onChangeEmail = (e) => setEmail(e.target.value);
     const onChangePassword = (e) => setPassword(e.target.value);
+
     const onSubmitAuth = async () => {
         try {
             let user;
