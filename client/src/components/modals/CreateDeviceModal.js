@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import { getBrands, getSelectedBrand, getSelectedType, getTypes } from '../../store/selectors/deviceSelectors';
 import { deviceActions } from '../../store/slices/deviceSlice';
-import { fetchBrands, fetchTypes } from '../../http/deviceApi';
+import { createDevice, fetchBrands, fetchTypes } from '../../http/deviceApi';
 
 const CreateDeviceModal = ({ show, onHide }) => {
     const [name, setName] = useState('');
@@ -43,7 +43,19 @@ const CreateDeviceModal = ({ show, onHide }) => {
         setFile(e.target.files[0]);
     };
 
-    const addDevice = () => { };
+    const addDevice = () => {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', `${price}`);
+        formData.append('img', file);
+        formData.append('brandId', selectedBrand.id);
+        formData.append('typeId', selectedType.id);
+        formData.append('info', JSON.stringify(info));
+
+        createDevice(formData).then((data) => {
+            onHide();
+        });
+    };
 
     useEffect(() => {
         fetchTypes().then((data) => dispatch(deviceActions.setTypes(data)));
