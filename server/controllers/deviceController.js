@@ -46,15 +46,33 @@ class DeviceController {
         }
 
         if (brandId && !typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId }, limit, offset });
+            devices = await Device.findAndCountAll({
+                where: { brandId }, limit, offset, include: [
+                    { model: Type, as: 'type' },
+                    { model: Brand, as: 'brand' },
+                    { model: DeviceInfo, as: 'info' }
+                ]
+            });
         }
 
         if (!brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
+            devices = await Device.findAndCountAll({
+                where: { typeId }, limit, offset, include: [
+                    { model: Type, as: 'type' },
+                    { model: Brand, as: 'brand' },
+                    { model: DeviceInfo, as: 'info' }
+                ]
+            });
         }
 
         if (brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
+            devices = await Device.findAndCountAll({
+                where: { brandId, typeId }, limit, offset, include: [
+                    { model: Type, as: 'type' },
+                    { model: Brand, as: 'brand' },
+                    { model: DeviceInfo, as: 'info' }
+                ]
+            });
         }
 
         return res.json(devices);
