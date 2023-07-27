@@ -8,6 +8,7 @@ import BrandBar from '../components/BrandBar';
 import DeviceList from '../components/DeviceList';
 import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
+import Pages from '../components/Pages';
 
 const Shop = () => {
     const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Shop = () => {
                 <Col md={9}>
                     <BrandBar />
                     <DeviceList />
+                    <Pages />
                 </Col>
             </Row>
         </Container>
