@@ -5,7 +5,10 @@ const initialState = {
     selectedType: {},
     brands: [],
     selectedBrand: {},
-    devices: []
+    devices: [],
+    page: 1,
+    totalCount: 0,
+    limit: 3
 };
 
 export const deviceSlice = createSlice({
@@ -22,10 +25,21 @@ export const deviceSlice = createSlice({
             state.devices = action.payload;
         },
         setSelectedType: (state, action) => {
+            state.page = 1;
             state.selectedType = action.payload;
         },
         setSelectedBrand: (state, action) => {
+            state.page = 1;
             state.selectedBrand = action.payload;
+        },
+        setPage: (state, action) => {
+            state.page = action.payload;
+        },
+        setTotalCount: (state, action) => {
+            state.totalCount = action.payload;
+        },
+        setLimit: (state, action) => {
+            state.limit = action.payload;
         },
     },
 });
