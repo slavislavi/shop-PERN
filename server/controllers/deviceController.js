@@ -1,7 +1,7 @@
 const uuid = require('uuid');
 const path = require('path');
 const ApiError = require('../error/ApiError');
-const { Device, DeviceInfo } = require('../models/models');
+const { Device, DeviceInfo, Type, Brand } = require('../models/models');
 
 class DeviceController {
     async create(req, res, next) {
@@ -36,7 +36,13 @@ class DeviceController {
         let devices;
 
         if (!brandId && !typeId) {
-            devices = await Device.findAndCountAll({ limit, offset });
+            devices = await Device.findAndCountAll({
+                limit, offset, include: [
+                    { model: Type, as: 'type' },
+                    { model: Brand, as: 'brand' },
+                    { model: DeviceInfo, as: 'info' }
+                ]
+            });
         }
 
         if (brandId && !typeId) {

@@ -19,6 +19,7 @@ const NavBar = () => {
     const logoutHandler = () => {
         dispatch(userActions.setUser({}));
         dispatch(userActions.setIsAuth(false));
+        localStorage.removeItem('token');
     };
 
     return (

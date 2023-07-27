@@ -16,7 +16,7 @@ const App = () => {
             dispatch(userActions.setUser(data));
             dispatch(userActions.setIsAuth(true));
         }).finally(() => setLoading(false));
-    }, []);
+    }, [dispatch]);
 
     if (loading) {
         return <Spinner animation="grow" />;

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+// this middleware runs when you press "add device"
 module.exports = function (role) {
     return function (req, res, next) {
         if (req.method === 'OPTIONS') {
@@ -8,14 +8,15 @@ module.exports = function (role) {
 
         try {
             const token = req.headers.authorization.split(' ')[1];
-            if (!token) {
-                res.status(401).json({ message: 'Not authorized' });
+
+            if (!JSON.parse(token)) {
+                return res.status(401).json({ message: 'Not authorized' });
             }
 
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
             if (decoded.role !== role) {
-                res.status(403).json({ message: 'Access denied' });
+                return res.status(403).json({ message: 'Access denied' });
             }
 
             req.user = decoded;
