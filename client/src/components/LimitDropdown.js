@@ -10,10 +10,14 @@ const LimitDropdown = () => {
     const onSetSelectedLimit = (opt) => () => dispatch(deviceActions.setLimit(opt));
 
     return (
-        <Dropdown className="mt-4" as={ButtonGroup} data-bs-theme="dark">
+        <Dropdown
+            className="mt-4"
+            as={ButtonGroup}
+            data-bs-theme="dark"
+        >
             <Button variant="dark">Products on page</Button>
             <Dropdown.Toggle split variant="dark" />
-            <Dropdown.Menu>
+            <Dropdown.Menu style={{ minWidth: 0 }}>
                 {options.map((opt) =>
                     <Dropdown.Item
                         key={opt}
