@@ -20,12 +20,13 @@ const Pages = () => {
     const onPaginationClick = (page) => () => dispatch(deviceActions.setPage(page));
 
     return (
-        <Pagination className="mt-5">
+        <Pagination className="mt-5 justify-content-center">
             {pages.map((page) =>
                 <Pagination.Item
                     active={currentPage === page}
                     key={page}
                     onClick={onPaginationClick(page)}
+                    className=""
                 >
                     {page}
                 </Pagination.Item>

@@ -8,7 +8,7 @@ const initialState = {
     devices: [],
     page: 1,
     totalCount: 0,
-    limit: 3
+    limit: 8
 };
 
 export const deviceSlice = createSlice({

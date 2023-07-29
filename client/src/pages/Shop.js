@@ -10,6 +10,7 @@ import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 import Pages from '../components/Pages';
 import { getLimit, getPage, getSelectedBrand, getSelectedType } from '../store/selectors/deviceSelectors';
+import LimitDropdown from '../components/LimitDropdown';
 
 const Shop = () => {
     const page = useSelector(getPage);
@@ -21,7 +22,7 @@ const Shop = () => {
     useEffect(() => {
         fetchTypes().then((data) => dispatch(deviceActions.setTypes(data)));
         fetchBrands().then((data) => dispatch(deviceActions.setBrands(data)));
-        fetchDevices(null, null, 1, 3).then((data) => {
+        fetchDevices(null, null, 1, 8).then((data) => {
             dispatch(deviceActions.setDevices(data.rows));
             dispatch(deviceActions.setTotalCount(data.count));
         });
@@ -39,6 +40,7 @@ const Shop = () => {
             <Row className="mt-2">
                 <Col md={3}>
                     <TypeBar />
+                    <LimitDropdown />
                 </Col>
                 <Col md={9}>
                     <BrandBar />
