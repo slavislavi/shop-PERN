@@ -1,21 +1,18 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { deviceActions } from '../store/slices/deviceSlice';
-import { getLimit } from '../store/selectors/deviceSelectors';
 
 const LimitDropdown = () => {
     const options = [4, 8, 12, 16, 32];
-    const limit = useSelector(getLimit);
     const dispatch = useDispatch();
 
     const onSetSelectedLimit = (opt) => () => dispatch(deviceActions.setLimit(opt));
 
     return (
-        <Dropdown className="mt-2 mb-2">
-            <Dropdown.Toggle>
-                {limit || "Products on page"}
-            </Dropdown.Toggle>
+        <Dropdown className="mt-4" as={ButtonGroup} data-bs-theme="dark">
+            <Button variant="dark">Products on page</Button>
+            <Dropdown.Toggle split variant="dark" />
             <Dropdown.Menu>
                 {options.map((opt) =>
                     <Dropdown.Item
