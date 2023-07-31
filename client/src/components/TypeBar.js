@@ -13,11 +13,12 @@ const TypeBar = () => {
     const selectAllTypes = () => dispatch(deviceActions.setSelectedType({}));
 
     return (
-        <ListGroup>
+        <ListGroup data-bs-theme="dark">
             <ListGroup.Item
                 style={{ cursor: "pointer" }}
                 active={!selectedType.id}
                 onClick={selectAllTypes}
+                variant="dark"
             >
                 All types
             </ListGroup.Item>
@@ -27,6 +28,7 @@ const TypeBar = () => {
                     active={type.id === selectedType.id}
                     key={type.id}
                     onClick={selectTypeHandler(type)}
+                    variant="dark"
                 >
                     {type.name}
                 </ListGroup.Item>
