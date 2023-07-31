@@ -6,11 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/constants';
-import { getIsAuth } from '../store/selectors/userSelectors';
+import { getIsAuth, getUser } from '../store/selectors/userSelectors';
 import { userActions } from '../store/slices/userSlice';
 
 const NavBar = () => {
     const isAuth = useSelector(getIsAuth);
+    const user = useSelector(getUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -25,20 +26,27 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <NavLink to={SHOP_ROUTE} style={{ color: "white" }}>Shop PERN</NavLink>
+                <NavLink
+                    to={SHOP_ROUTE}
+                    style={{ color: "white", textDecoration: "none", fontWeight: 700 }}
+                >
+                    Shop PERN
+                </NavLink>
                 {isAuth ?
                     <Nav className="ml-auto" style={{ color: "white" }}>
-                        <Button
+                        {user?.role === "ADMIN" && <Button
                             variant="outline-light"
                             onClick={toAdminPanelHandler}
                         >
-                            Admin Panel</Button>
+                            Admin Panel
+                        </Button>}
                         <Button
                             variant="outline-light"
                             className="ms-2"
                             onClick={logoutHandler}
                         >
-                            Log Out</Button>
+                            Log Out
+                        </Button>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{ color: "white" }}>
