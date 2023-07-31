@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import { check } from './http/userApi';
 import { userActions } from './store/slices/userSlice';
 import { Spinner } from 'react-bootstrap';
+import './styles/index.css';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
