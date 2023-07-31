@@ -15,7 +15,6 @@ const TypeBar = () => {
     return (
         <ListGroup data-bs-theme="dark">
             <ListGroup.Item
-                style={{ cursor: "pointer" }}
                 active={!selectedType.id}
                 onClick={selectAllTypes}
                 variant="dark"
@@ -24,7 +23,6 @@ const TypeBar = () => {
             </ListGroup.Item>
             {types.map((type) =>
                 <ListGroup.Item
-                    style={{ cursor: "pointer" }}
                     active={type.id === selectedType.id}
                     key={type.id}
                     onClick={selectTypeHandler(type)}

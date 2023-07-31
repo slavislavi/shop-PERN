@@ -1,9 +1,36 @@
+/* Pages */
 .pagination .page-item .page-link {
-    color: #dee2e6;
+    color: var(--bs-gray-300);
     border: none;
 }
 
 .pagination .page-item.active .page-link {
-    color: #1a1d20;
-    background-color: #dee2e6;
+    color: var(--bs-dark-bg-subtle);
+    background-color: var(--bs-gray-300);
+}
+
+/* NavBar */
+.navbar .container a.active {
+    color: var(--bs-gray-300);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.navbar .container a.active:hover {
+    transform: scale(1.05);
+}
+
+/* TypeBar */
+.list-group .list-group-item {
+    cursor: pointer;
+    border: none;
+}
+
+.list-group .list-group-item:not(.active):hover {
+    background-color: var(--bs-gray-900);
+}
+
+.list-group .list-group-item.active {
+    cursor: auto;
 }

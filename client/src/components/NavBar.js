@@ -26,12 +26,7 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <NavLink
-                    to={SHOP_ROUTE}
-                    style={{ color: "white", textDecoration: "none", fontWeight: 700 }}
-                >
-                    Shop PERN
-                </NavLink>
+                <NavLink to={SHOP_ROUTE}>Shop PERN</NavLink>
                 {isAuth ?
                     <Nav className="ml-auto" style={{ color: "white" }}>
                         {user?.role === "ADMIN" && <Button
