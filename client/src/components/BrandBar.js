@@ -12,15 +12,23 @@ const BrandBar = () => {
 
     const selectBrandHandler = (brand) => () => dispatch(deviceActions.setSelectedBrand(brand));
 
+    const selectAllBrands = () => dispatch(deviceActions.setSelectedBrand({}));
+
     return (
         <Row className="d-flex">
+            <Card
+                className="brand-card all-brands-btn"
+                onClick={selectAllBrands}
+                border={!selectedBrand.id ? "dark" : "light"}
+            >
+                All brands
+            </Card>
             {brands.map((brand) =>
                 <Card
                     key={brand.id}
-                    className="p-3"
+                    className="brand-card"
                     onClick={selectBrandHandler(brand)}
-                    border={brand.id === selectedBrand.id ? "danger" : "light"}
-                    style={{ cursor: "pointer", width: "auto" }}
+                    border={brand.id === selectedBrand.id ? "dark" : "light"}
                 >
                     {brand.name}
                 </Card>

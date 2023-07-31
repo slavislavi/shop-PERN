@@ -35,6 +35,10 @@
     cursor: auto;
 }
 
+.all-types-btn {
+    font-weight: 500;
+}
+
 /* DeviceItem */
 .card.device-card {
     cursor: pointer;
@@ -47,3 +51,19 @@
 }
 
 /* BrandBar */
+.brand-card {
+    align-items: center;
+    cursor: pointer;
+    min-width: 80px;
+    width: auto;
+    padding: 8px 8px;
+    margin: 0 4px 4px 0;
+}
+
+.brand-card:not(.border-dark):hover {
+    background-color: var(--bs-gray-200);
+}
+
+.all-brands-btn {
+    font-weight: 500;
+}

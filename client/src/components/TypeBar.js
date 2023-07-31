@@ -18,6 +18,7 @@ const TypeBar = () => {
                 active={!selectedType.id}
                 onClick={selectAllTypes}
                 variant="dark"
+                className="all-types-btn"
             >
                 All types
             </ListGroup.Item>
