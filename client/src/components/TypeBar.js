@@ -10,9 +10,17 @@ const TypeBar = () => {
     const dispatch = useDispatch();
 
     const selectTypeHandler = (type) => () => dispatch(deviceActions.setSelectedType(type));
+    const selectAllTypes = () => dispatch(deviceActions.setSelectedType({}));
 
     return (
         <ListGroup>
+            <ListGroup.Item
+                style={{ cursor: "pointer" }}
+                active={!selectedType.id}
+                onClick={selectAllTypes}
+            >
+                All types
+            </ListGroup.Item>
             {types.map((type) =>
                 <ListGroup.Item
                     style={{ cursor: "pointer" }}
