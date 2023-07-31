@@ -11,7 +11,7 @@ const DeviceItem = ({ device }) => {
 
     return (
         <Col md={3} className="mt-3" onClick={toDeviceDetailsHandler}>
-            <Card style={{ cursor: "pointer", width: 150 }} border="light">
+            <Card border="light" className="device-card">
                 <Image
                     width={150}
                     height={150}

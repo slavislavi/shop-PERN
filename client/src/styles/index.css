@@ -34,3 +34,16 @@
 .list-group .list-group-item.active {
     cursor: auto;
 }
+
+/* DeviceItem */
+.card.device-card {
+    cursor: pointer;
+    width: 150px;
+}
+
+.device-card:hover img {
+    transition: all 0.2s;
+    transform: scale(1.05);
+}
+
+/* BrandBar */
