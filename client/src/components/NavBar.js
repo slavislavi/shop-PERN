@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/constants';
+import { ADMIN_ROUTE, LOGIN_ROUTE } from '../utils/constants';
 import { getIsAuth, getUser } from '../store/selectors/userSelectors';
 import { userActions } from '../store/slices/userSlice';
+import Logo from './Logo';
 
 const NavBar = () => {
     const isAuth = useSelector(getIsAuth);
@@ -26,9 +27,7 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <NavLink to={SHOP_ROUTE}>
-                    Shop <span className="logo-text">PERN</span>
-                </NavLink>
+                <Logo size="logo-md" />
                 {isAuth ?
                     <Nav className="ml-auto">
                         {user?.role === "ADMIN" && <Button

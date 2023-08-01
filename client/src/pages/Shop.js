@@ -26,7 +26,7 @@ const Shop = () => {
             dispatch(deviceActions.setDevices(data.rows));
             dispatch(deviceActions.setTotalCount(data.count));
         });
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         fetchDevices(selectedType.id, selectedBrand.id, page, limit).then((data) => {
