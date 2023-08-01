@@ -18,7 +18,7 @@ const Admin = () => {
     const closeDeviceModalHandler = () => setDeviceVisible(false);
 
     return (
-        <Container className="d-flex flex-column" style={{ width: '25%' }}>
+        <Container className="d-flex flex-column page-container" style={{ width: '25%' }}>
             <Button
                 variant="outline-dark"
                 className="mt-4 p-2"

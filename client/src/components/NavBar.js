@@ -28,7 +28,7 @@ const NavBar = () => {
             <Container>
                 <NavLink to={SHOP_ROUTE}>Shop PERN</NavLink>
                 {isAuth ?
-                    <Nav className="ml-auto" style={{ color: "white" }}>
+                    <Nav className="ml-auto">
                         {user?.role === "ADMIN" && <Button
                             variant="outline-light"
                             onClick={toAdminPanelHandler}
@@ -44,7 +44,7 @@ const NavBar = () => {
                         </Button>
                     </Nav>
                     :
-                    <Nav className="ml-auto" style={{ color: "white" }}>
+                    <Nav className="ml-auto">
                         <Button
                             variant="outline-light"
                             onClick={toLoginPageHandler}

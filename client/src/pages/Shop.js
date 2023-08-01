@@ -36,8 +36,8 @@ const Shop = () => {
     }, [dispatch, limit, page, selectedBrand, selectedType]);
 
     return (
-        <Container>
-            <Row className="mt-2">
+        <Container className="page-container">
+            <Row>
                 <Col md={3}>
                     <TypeBar />
                     <LimitDropdown />

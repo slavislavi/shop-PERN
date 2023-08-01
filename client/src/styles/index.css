@@ -1,3 +1,15 @@
+/* CONSTS */
+:root {
+    --header-height: 54px;
+    --footer-height: 160px;
+}
+
+/* Common */
+.page-container {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    padding-top: 1rem;
+}
+
 /* Pages */
 .pagination .page-item .page-link {
     color: var(--bs-gray-300);
@@ -10,15 +22,14 @@
 }
 
 /* NavBar */
-.navbar .container a.active {
+.navbar .container a {
     color: var(--bs-gray-300);
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.2s;
 }
 
-.navbar .container a.active:hover {
-    transform: scale(1.05);
+.navbar .navbar-nav {
+    color: var(--bs-white);
 }
 
 /* TypeBar */
@@ -66,4 +77,37 @@
 
 .all-brands-btn {
     font-weight: 500;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--bs-gray-900);
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    width: 100%;
+    min-height: var(--footer-height);
+    position: relative;
+    bottom: 0;
+}
+
+.socials {
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: var(--bs-white);
+    width: auto;
+    margin-right: 1rem;
+}
+
+.footer a:hover {
+    color: var(--bs-gray-400);
+}
+
+.footer-copyright {
+    color: var(--bs-white);
+    padding: 20px 0;
+    font-size: smaller;
 }

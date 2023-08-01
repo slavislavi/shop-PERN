@@ -1,10 +1,11 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 const Basket = () => {
     return (
-        <div>
+        <Container className="page-container">
             BASKET PAGE
-        </div>
+        </Container>
     );
 };
 

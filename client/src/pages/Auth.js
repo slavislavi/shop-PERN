@@ -37,8 +37,7 @@ const Auth = () => {
 
     return (
         <Container
-            className="d-flex justify-content-center align-items-center"
-            style={{ height: window.innerHeight - 54 }}
+            className="d-flex justify-content-center align-items-center page-container"
         >
             <Card style={{ width: 600 }} className="p-5">
                 <h2 className="m-auto">{isLoginPage ? "Authorization" : "Registration"}</h2>

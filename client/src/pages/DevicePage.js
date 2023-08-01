@@ -14,7 +14,7 @@ const DevicePage = () => {
     }, []);
 
     return (
-        <Container className="mt-3">
+        <Container className="mt-3 page-container">
             <Row>
                 <Col md={4}>
                     <Image
