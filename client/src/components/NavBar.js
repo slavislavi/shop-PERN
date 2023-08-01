@@ -26,7 +26,9 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <NavLink to={SHOP_ROUTE}>Shop PERN</NavLink>
+                <NavLink to={SHOP_ROUTE}>
+                    Shop <span className="logo-text">PERN</span>
+                </NavLink>
                 {isAuth ?
                     <Nav className="ml-auto">
                         {user?.role === "ADMIN" && <Button

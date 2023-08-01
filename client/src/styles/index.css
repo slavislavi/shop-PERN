@@ -32,6 +32,11 @@
     color: var(--bs-white);
 }
 
+.logo-text {
+    font-family: "Dr Sugiyama", cursive;
+    font-size: 24px;
+}
+
 /* TypeBar */
 .list-group .list-group-item {
     cursor: pointer;
