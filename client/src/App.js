@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import AppRouter from './components/AppRouter';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import Notification from './components/Notification';
+import { getNotification } from './store/selectors/notificationSelectors';
 import { check } from './http/userApi';
 import { userActions } from './store/slices/userSlice';
 import { Spinner } from 'react-bootstrap';
@@ -11,6 +12,7 @@ import './styles/index.css';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
+    const { message, variant } = useSelector(getNotification);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,11 +27,12 @@ const App = () => {
     }
 
     return (
-        <BrowserRouter>
+        <>
             <NavBar />
             <AppRouter />
             <Footer />
-        </BrowserRouter>
+            {message && <Notification message={message} variant={variant} />}
+        </>
     );
 };
 
