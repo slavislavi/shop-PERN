@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { notificationActions } from '../store/slices/notificationSlice';
 
-const NOTIFICATION_DELAY = 5000;
+const NOTIFICATION_DELAY = 3000;
 
 const Notification = ({ message, variant }) => {
     const [notificationMsg, setNotificationMsg] = useState('');
@@ -11,18 +11,14 @@ const Notification = ({ message, variant }) => {
     const containerEl = document.getElementById('notification-root');
     const notificationEl = useRef(null);
     const timeout = useRef();
-
     const dispatch = useDispatch();
 
     const addVariantClass = () => {
         if (variant === 'success') {
-            setNotificationClass('notification mb-2 is-primary');
+            setNotificationClass('notification success');
         }
         if (variant === 'danger') {
-            setNotificationClass('notification mb-2 is-danger');
-        }
-        if (variant === 'warning') {
-            setNotificationClass('notification mb-2 is-warning');
+            setNotificationClass('notification danger');
         }
     };
 
@@ -35,7 +31,7 @@ const Notification = ({ message, variant }) => {
         }
         setTimeout(() => {
             dispatch(notificationActions.setNotification({ message: '', variant: '' }));
-        }, 300);
+        }, 200);
     };
 
     useEffect(() => {
@@ -49,7 +45,7 @@ const Notification = ({ message, variant }) => {
                 addVariantClass();
                 setTimeout(() => {
                     if (notificationEl.current) {
-                        notificationEl.current.style.opacity = '1';
+                        notificationEl.current.style.opacity = '0.8';
                         timeout.current = setTimeout(() => {
                             removeNotification();
                         }, NOTIFICATION_DELAY);
@@ -61,7 +57,7 @@ const Notification = ({ message, variant }) => {
             addVariantClass();
             setTimeout(() => {
                 if (notificationEl.current) {
-                    notificationEl.current.style.opacity = '1';
+                    notificationEl.current.style.opacity = '0.8';
                     timeout.current = setTimeout(() => {
                         removeNotification();
                     }, NOTIFICATION_DELAY);
@@ -72,8 +68,8 @@ const Notification = ({ message, variant }) => {
 
     const output = (
         <div className={notificationClass} ref={notificationEl}>
-            <button className="delete" onClick={removeNotification}></button>
-            <div>{notificationMsg}</div>
+            <div className="notification-text">{notificationMsg}</div>
+            <button className="notification-delete" onClick={removeNotification}>&#x2715;</button>
         </div>
     );
 

@@ -133,4 +133,41 @@
 }
 
 /* Notification */
-.notification {}
+.notification {
+    position: absolute;
+    z-index: 10;
+    bottom: 5%;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 400px;
+    height: 75px;
+    border-radius: 5px;
+    background-color: #ccdfff;
+    color: #000030;
+}
+
+.notification.danger {
+    background-color: #ffcccc;
+    color: #300000;
+}
+
+.notification.success {
+    background-color: #ccffcc;
+    color: #003000;
+}
+
+.notification-text {
+    padding: 4px 12px;
+    font-weight: 600;
+    align-self: center;
+}
+
+.notification-delete {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    align-self: flex-start;
+}

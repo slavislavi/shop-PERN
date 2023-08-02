@@ -5,6 +5,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/constants';
 import { login, registration } from '../http/userApi';
 import { userActions } from '../store/slices/userSlice';
+import { notificationActions } from '../store/slices/notificationSlice';
 
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -33,6 +34,13 @@ const Auth = () => {
         } catch (e) {
             alert(e.response.data.message);
         }
+    };
+
+    const onClickFakeNotification = () => { // TODO Delete fake function & Button
+        dispatch(notificationActions.setNotification({
+            message: 'Finally that works!',
+            variant: ''
+        }));
     };
 
     return (
@@ -65,6 +73,13 @@ const Auth = () => {
                                 Already registered? <NavLink to={LOGIN_ROUTE}>Sign In</NavLink>
                             </div>
                         }
+                        <Button
+                            variant="outline-info"
+                            style={{ width: "auto" }}
+                            onClick={onClickFakeNotification}
+                        >
+                            Notification
+                        </Button>
                         <Button
                             variant="outline-success"
                             style={{ width: "auto" }}
