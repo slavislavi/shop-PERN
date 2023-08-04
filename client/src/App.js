@@ -22,7 +22,11 @@ const App = () => {
     }, [dispatch]);
 
     if (loading) {
-        return <Spinner animation="grow" className="justify-content-center" />;
+        return (
+            <div className="spinner-container">
+                <Spinner animation="grow" />
+            </div>
+        );
     }
 
     return (

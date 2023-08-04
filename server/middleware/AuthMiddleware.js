@@ -8,14 +8,14 @@ module.exports = function (req, res, next) {
     try {
         const token = req.headers.authorization.split(' ')[1];
 
-        if (!JSON.parse(token)) {
-            return res.status(401).json({ message: 'Not authorized' });
-        }
+        // if (!JSON.parse(token)) {
+        //     return res.status(401).json({ message: 'Not authorized' });
+        // }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
         next();
     } catch (e) {
-        res.status(401).json({ message: 'Token cannot be refreshed. User is not authorized' });
+        res.status(401).json({ message: 'Not authorized' });
     }
 };

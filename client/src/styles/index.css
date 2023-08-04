@@ -10,6 +10,14 @@
     padding-top: 1rem;
 }
 
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
 /* Pages */
 .pagination .page-item .page-link {
     color: var(--bs-gray-300);
