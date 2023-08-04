@@ -62,7 +62,6 @@ const Auth = () => {
                 <h2 className="m-auto">{isLoginPage ? "Sign in" : "Registration"}</h2>
                 <Form className="d-flex flex-column">
                     <FloatingLabel
-                        controlId="floatingInput"
                         label="Email"
                         className="mb-3 mt-3"
                     >
@@ -74,7 +73,6 @@ const Auth = () => {
                         />
                     </FloatingLabel>
                     <FloatingLabel
-                        controlId="floatingInput"
                         label="Password"
                         className="mb-3"
                     >
