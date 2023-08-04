@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Card, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Container, Form, Row, FloatingLabel } from 'react-bootstrap';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/constants';
 import { login, registration } from '../http/userApi';
@@ -59,21 +59,34 @@ const Auth = () => {
             className="d-flex justify-content-center align-items-center page-container"
         >
             <Card style={{ width: 600 }} className="p-5">
-                <h2 className="m-auto">{isLoginPage ? "Authorization" : "Registration"}</h2>
+                <h2 className="m-auto">{isLoginPage ? "Sign in" : "Registration"}</h2>
                 <Form className="d-flex flex-column">
-                    <Form.Control
-                        className="mt-3"
-                        placeholder="Enter email..."
-                        value={email}
-                        onChange={onChangeEmail}
-                    />
-                    <Form.Control
-                        className="mt-3"
-                        placeholder="Enter password..."
-                        type="password"
-                        value={password}
-                        onChange={onChangePassword}
-                    />
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="Email"
+                        className="mb-3 mt-3"
+                    >
+                        <Form.Control
+                            placeholder="Enter email..."
+                            value={email}
+                            onChange={onChangeEmail}
+                            size="lg"
+                        />
+                    </FloatingLabel>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="Password"
+                        className="mb-3"
+                    >
+                        <Form.Control
+                            placeholder="Enter password..."
+                            type="password"
+                            value={password}
+                            onChange={onChangePassword}
+                            size="lg"
+                        />
+                    </FloatingLabel>
+
                     <Row className="d-flex justify-content-between mt-3 ps-3 pe-3">
                         {isLoginPage ?
                             <div style={{ width: "auto" }} className="p-0">
