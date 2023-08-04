@@ -16,8 +16,10 @@ const App = () => {
 
     useEffect(() => {
         check().then((data) => {
-            dispatch(userActions.setUser(data));
-            dispatch(userActions.setIsAuth(true));
+            if (data) {
+                dispatch(userActions.setUser(data));
+                dispatch(userActions.setIsAuth(true));
+            }
         }).finally(() => setLoading(false));
     }, [dispatch]);
 
