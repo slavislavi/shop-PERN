@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import { ADMIN_ROUTE, LOGIN_ROUTE } from '../utils/constants';
 import { getIsAuth, getUser } from '../store/selectors/userSelectors';
 import { userActions } from '../store/slices/userSlice';
+import { notificationActions } from '../store/slices/notificationSlice';
 import Logo from './Logo';
 
 const NavBar = () => {
@@ -22,6 +23,9 @@ const NavBar = () => {
         dispatch(userActions.setUser({}));
         dispatch(userActions.setIsAuth(false));
         localStorage.removeItem('token');
+        dispatch(notificationActions.setNotification({
+            message: 'Good bye',
+        }));
     };
 
     return (

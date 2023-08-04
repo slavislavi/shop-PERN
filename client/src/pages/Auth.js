@@ -25,8 +25,16 @@ const Auth = () => {
             let user;
             if (isLoginPage) {
                 user = await login(email, password);
+                dispatch(notificationActions.setNotification({
+                    message: `Welcome, ${user.email}!`,
+                    variant: 'success'
+                }));
             } else {
                 user = await registration(email, password);
+                dispatch(notificationActions.setNotification({
+                    message: 'Successfully registered!',
+                    variant: 'success'
+                }));
             }
             dispatch(userActions.setUser(user));
             dispatch(userActions.setIsAuth(true));
