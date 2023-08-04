@@ -1,3 +1,3 @@
-export const getIsAuth = (state) => state.user.isAuth || false;
+export const getIsAuth = (state) => state.user.isAuth;
 
-export const getUser = (state) => state.user.user || {};
+export const getUser = (state) => state.user.user;

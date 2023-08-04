@@ -32,7 +32,10 @@ const Auth = () => {
             dispatch(userActions.setIsAuth(true));
             navigate(SHOP_ROUTE);
         } catch (e) {
-            alert(e.response.data.message);
+            dispatch(notificationActions.setNotification({
+                message: e.response.data.message,
+                variant: 'danger'
+            }));
         }
     };
 
