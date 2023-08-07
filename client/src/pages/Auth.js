@@ -47,13 +47,6 @@ const Auth = () => {
         }
     };
 
-    const onClickFakeNotification = () => { // TODO Delete fake function & Button
-        dispatch(notificationActions.setNotification({
-            message: 'Finally that works!',
-            variant: ''
-        }));
-    };
-
     return (
         <Container
             className="d-flex justify-content-center align-items-center page-container"
@@ -95,13 +88,6 @@ const Auth = () => {
                                 Already registered? <NavLink to={LOGIN_ROUTE}>Sign In</NavLink>
                             </div>
                         }
-                        <Button
-                            variant="outline-info"
-                            style={{ width: "auto" }}
-                            onClick={onClickFakeNotification}
-                        >
-                            Notification
-                        </Button>
                         <Button
                             variant="outline-success"
                             style={{ width: "auto" }}

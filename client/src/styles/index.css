@@ -187,3 +187,42 @@
     outline: none;
     align-self: flex-start;
 }
+
+/* Admin panel */
+.admin-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--bs-gray-300);
+}
+
+.types-table-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    width: 100%;
+    padding: 10px;
+}
+
+.brands-table-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    width: 100%;
+    padding: 10px;
+}
+
+.products-table-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    flex: 1 0;
+}
+
+.add-btn {
+    width: 100%;
+    max-width: 200px;
+    font-size: 32px;
+    line-height: 32px;
+    padding: 0 0 7px 0;
+    align-self: flex-end;
+}

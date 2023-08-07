@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 import CreateTypeModal from '../components/modals/CreateTypeModal';
 import CreateBrandModal from '../components/modals/CreateBrandModal';
 import CreateDeviceModal from '../components/modals/CreateDeviceModal';
@@ -18,32 +18,117 @@ const Admin = () => {
     const closeDeviceModalHandler = () => setDeviceVisible(false);
 
     return (
-        <Container className="d-flex flex-column page-container" style={{ width: '25%' }}>
-            <Button
-                variant="outline-dark"
-                className="mt-4 p-2"
-                onClick={openTypeModalHandler}
-            >
-                Add Type
-            </Button>
-            <Button
-                variant="outline-dark"
-                className="mt-4 p-2"
-                onClick={openBrandModalHandler}
-            >
-                Add Brand
-            </Button>
-            <Button
-                variant="outline-dark"
-                className="mt-4 p-2"
-                onClick={openDeviceModalHandler}
-            >
-                Add Device
-            </Button>
+        <div className="page-container p-0 admin-container">
+            <div className="types-table-container">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Type Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mobile phone</td>
+                        </tr>
+                        <tr>
+                            <td>Laptop</td>
+                        </tr>
+                        <tr>
+                            <td>Coffee machine</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                <Button
+                    variant="outline-dark"
+                    className="add-btn"
+                    onClick={openTypeModalHandler}
+                >+</Button>
+            </div>
+            <div className="brands-table-container">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Brand Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Samsung</td>
+                        </tr>
+                        <tr>
+                            <td>Apple</td>
+                        </tr>
+                        <tr>
+                            <td>Lenovo</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                <Button
+                    variant="outline-dark"
+                    className="add-btn"
+                    onClick={openBrandModalHandler}
+                >+</Button>
+            </div>
+            <div className="products-table-container">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>url img</td>
+                            <td>iPhone 14 pro silver</td>
+                            <td>1800</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>url img</td>
+                            <td>Macbook Pro M2 max grey</td>
+                            <td>3250</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>url img</td>
+                            <td>Delonghi Coffee Chamber DS-5411</td>
+                            <td>2715</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>url img</td>
+                            <td>iPhone 14 pro silver</td>
+                            <td>1800</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>url img</td>
+                            <td>Macbook Pro M2 max grey</td>
+                            <td>3250</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>url img</td>
+                            <td>Delonghi Coffee Chamber DS-5411</td>
+                            <td>2715</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                <Button
+                    variant="outline-dark"
+                    className="add-btn"
+                    onClick={openDeviceModalHandler}
+                >+</Button>
+            </div>
+
             <CreateTypeModal show={typeVisible} onHide={closeTypeModalHandler} />
             <CreateBrandModal show={brandVisible} onHide={closeBrandModalHandler} />
             <CreateDeviceModal show={deviceVisible} onHide={closeDeviceModalHandler} />
-        </Container>
+        </div>
 
     );
 };
