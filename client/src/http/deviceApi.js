@@ -30,6 +30,16 @@ export const fetchBrands = async () => {
     return data;
 };
 
+export const updateBrand = async (id, brand) => { // NOT SURE
+    const { data } = await $authHost.put('api/brand' + id, brand);
+    return data;
+};
+
+export const deleteBrand = async (id) => { // NOT SURE
+    const { data } = await $authHost.delete('api/brand' + id);
+    return data;
+};
+
 export const createDevice = async (device) => {
     const { data } = await $authHost.post('api/device', device);
     return data;
@@ -46,5 +56,15 @@ export const fetchDevices = async (typeId, brandId, page, limit, isAdminList) =>
 
 export const fetchOneDevice = async (id) => {
     const { data } = await $host.get('api/device/' + id);
+    return data;
+};
+
+export const updateDevice = async (id, device) => { // NOT SURE
+    const { data } = await $authHost.put('api/brand' + id, device);
+    return data;
+};
+
+export const deleteDevice = async (id) => { // NOT SURE
+    const { data } = await $authHost.delete('api/device' + id);
     return data;
 };
