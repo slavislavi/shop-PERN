@@ -95,6 +95,20 @@ class DeviceController {
 
         return res.json(device);
     }
+
+    async update(req, res) {
+        const { id, name, img, price, typeId } = req.body;
+        const device = await Device.update({
+            name: name,
+            img: img,
+            price: price,
+            typeId: typeId
+        },
+            {
+                where: { id, typeId }
+            });
+        res.json(device);
+    }
 }
 
 module.exports = new DeviceController();
