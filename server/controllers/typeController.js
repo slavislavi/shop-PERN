@@ -18,6 +18,23 @@ class TypeController {
         const types = await Type.findAll();
         return res.json(types);
     }
+
+    async update(req, res) {
+        const { id, name } = req.body;
+        const type = await Type.update({
+            name: name,
+        },
+            {
+                where: { id }
+            });
+        res.json(type);
+    }
+
+    async delete(req, res) {
+        const { id } = req.body;
+        const type = await Type.destroy({ where: { id } });
+        return res.json(type);
+    }
 }
 
 module.exports = new TypeController();

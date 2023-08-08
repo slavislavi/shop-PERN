@@ -4,6 +4,8 @@ const deviceController = require('../controllers/deviceController');
 const checkRole = require('../middleware/CheckRoleMiddleware');
 
 router.post('/', checkRole('ADMIN'), deviceController.create);
+router.put('/:id', checkRole('ADMIN'), deviceController.update);
+router.delete('/:id', checkRole('ADMIN'), deviceController.delete);
 router.get('/', deviceController.getAll);
 router.get('/:id', deviceController.getOne);
 
