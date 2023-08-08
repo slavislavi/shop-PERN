@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Table } from 'react-bootstrap';
 import CreateTypeModal from '../components/modals/CreateTypeModal';
 import CreateBrandModal from '../components/modals/CreateBrandModal';
 import CreateDeviceModal from '../components/modals/CreateDeviceModal';
+import ConfirmModal from '../components/modals/ConfirmModal';
+import { getBrands, getDevices, getTypes } from '../store/selectors/deviceSelectors';
+import { fetchDevices } from '../http/deviceApi';
+import { deviceActions } from '../store/slices/deviceSlice';
 
 const Admin = () => {
     const [typeVisible, setTypeVisible] = useState(false);
     const [brandVisible, setBrandVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
+    const [confirmVisible, setConfirmVisible] = useState(false);
+
+    const types = useSelector(getTypes);
+    const brands = useSelector(getBrands);
+    const devices = useSelector(getDevices);
+
+    const dispatch = useDispatch();
 
     const openTypeModalHandler = () => setTypeVisible(true);
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
+    const openConfirmModalHandler = () => setConfirmVisible(true);
 
     const closeTypeModalHandler = () => setTypeVisible(false);
     const closeBrandModalHandler = () => setBrandVisible(false);
     const closeDeviceModalHandler = () => setDeviceVisible(false);
+    const closeConfirmModalHandler = () => setConfirmVisible(false);
+
+    useEffect(() => {
+        fetchDevices(null, null, null, null, true).then((data) => {
+            dispatch(deviceActions.setDevices(data.rows));
+            dispatch(deviceActions.setTotalCount(data.count));
+        });
+    }, [dispatch]);
 
     return (
         <div className="page-container p-0 admin-container">
@@ -27,21 +48,13 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Mobile phone</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>Laptop</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>Coffee machine</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
+                        {types.map((type) =>
+                            <tr key={type.id}>
+                                <td>{type.name}</td>
+                                <td className="edit-btn">&#8634;</td>
+                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
                 <Button
@@ -58,21 +71,13 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Samsung</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>Apple</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>Lenovo</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
+                        {brands.map((brand) =>
+                            <tr key={brand.id}>
+                                <td>{brand.name}</td>
+                                <td className="edit-btn">&#8634;</td>
+                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
                 <Button
@@ -94,60 +99,17 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>19</td>
-                            <td>url img</td>
-                            <td>iPhone 14 pro silver</td>
-                            <td>1800</td>
-                            <td>4</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>157</td>
-                            <td>url img</td>
-                            <td>Macbook Pro M2 max grey</td>
-                            <td>3250</td>
-                            <td>5</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>135</td>
-                            <td>url img</td>
-                            <td>Delonghi Coffee Chamber DS-5411</td>
-                            <td>2715</td>
-                            <td>4</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>315</td>
-                            <td>url img</td>
-                            <td>iPhone 14 pro silver</td>
-                            <td>1800</td>
-                            <td>4</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>85</td>
-                            <td>url img</td>
-                            <td>Macbook Pro M2 max grey</td>
-                            <td>3250</td>
-                            <td>5</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>url img</td>
-                            <td>Delonghi Coffee Chamber DS-5411</td>
-                            <td>2715</td>
-                            <td>4</td>
-                            <td className="edit-btn">&#8634;</td>
-                            <td className="delete-btn">&#x2715;</td>
-                        </tr>
+                        {devices.map((device) =>
+                            <tr key={device.id}>
+                                <td>{device.id}</td>
+                                <td>{device.img}</td>
+                                <td>{device.name}</td>
+                                <td>{device.price}</td>
+                                <td>{device.rating}</td>
+                                <td className="edit-btn">&#8634;</td>
+                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
                 <Button
@@ -160,6 +122,11 @@ const Admin = () => {
             <CreateTypeModal show={typeVisible} onHide={closeTypeModalHandler} />
             <CreateBrandModal show={brandVisible} onHide={closeBrandModalHandler} />
             <CreateDeviceModal show={deviceVisible} onHide={closeDeviceModalHandler} />
+            <ConfirmModal
+                show={confirmVisible}
+                onHide={closeConfirmModalHandler}
+                entity={null}
+            />
         </div>
 
     );

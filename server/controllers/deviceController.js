@@ -29,11 +29,17 @@ class DeviceController {
     }
 
     async getAll(req, res) {
-        let { brandId, typeId, limit, page } = req.query;
+        let { brandId, typeId, limit, page, isAdminList } = req.query;
         page = page || 1;
         limit = limit || 8;
         let offset = page * limit - limit;
         let devices;
+
+        if (isAdminList) {
+            page = undefined;
+            limit = undefined;
+            devices = await Device.findAll();
+        }
 
         if (!brandId && !typeId) {
             devices = await Device.findAndCountAll({
