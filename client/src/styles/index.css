@@ -2,6 +2,19 @@
 :root {
     --header-height: 60px;
     --footer-height: 160px;
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: var(--bs-gray-300);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        box-shadow: 0 0 3px #5e5e5e;
+        background-color: var(--bs-gray-900);
+    }
 }
 
 /* Common */
