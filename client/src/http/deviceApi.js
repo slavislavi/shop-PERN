@@ -10,6 +10,16 @@ export const fetchTypes = async () => {
     return data;
 };
 
+export const updateType = async (id, type) => { // NOT SURE
+    const { data } = await $authHost.put('api/type' + id, type);
+    return data;
+};
+
+export const deleteType = async (id) => { // NOT SURE
+    const { data } = await $authHost.delete('api/type' + id);
+    return data;
+};
+
 export const createBrand = async (brand) => {
     const { data } = await $authHost.post('api/brand', brand);
     return data;

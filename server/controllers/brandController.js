@@ -18,6 +18,17 @@ class BrandController {
         return res.json(brands);
     }
 
+    async getOne(req, res) {
+        const { id } = req.params;
+        const brand = await Brand.findOne(
+            {
+                where: { id },
+            }
+        );
+
+        return res.json(brand);
+    }
+
     async update(req, res) {
         const { id, name } = req.body;
         const brand = await Brand.update({
