@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import { getBrands, getSelectedBrand, getSelectedType, getTypes } from '../../store/selectors/deviceSelectors';
 import { deviceActions } from '../../store/slices/deviceSlice';
+import { notificationActions } from '../../store/slices/notificationSlice';
 import { createDevice, fetchBrands, fetchTypes } from '../../http/deviceApi';
 
 const CreateDeviceModal = ({ show, onHide }) => {
@@ -53,6 +54,10 @@ const CreateDeviceModal = ({ show, onHide }) => {
         formData.append('info', JSON.stringify(info));
 
         createDevice(formData).then((data) => {
+            dispatch(notificationActions.setNotification({
+                message: 'New product in database now',
+                variant: 'success'
+            }));
             onHide();
         });
     };

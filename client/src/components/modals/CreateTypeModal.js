@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { createType } from '../../http/deviceApi';
+import { notificationActions } from '../../store/slices/notificationSlice';
 
 const CreateTypeModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
+    const dispatch = useDispatch();
 
     const addType = () => {
         createType({ name: input }).then((data) => {
+            dispatch(notificationActions.setNotification({
+                message: 'New type in database now',
+                variant: 'success'
+            }));
             setInput('');
             onHide();
         });

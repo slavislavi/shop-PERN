@@ -198,7 +198,7 @@
 .types-table-container {
     display: flex;
     flex-direction: column;
-    max-width: 200px;
+    max-width: 220px;
     width: 100%;
     padding: 10px;
 }
@@ -206,7 +206,7 @@
 .brands-table-container {
     display: flex;
     flex-direction: column;
-    max-width: 200px;
+    max-width: 220px;
     width: 100%;
     padding: 10px;
 }
@@ -220,9 +220,26 @@
 
 .add-btn {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
     font-size: 32px;
     line-height: 32px;
     padding: 0 0 7px 0;
     align-self: flex-end;
+}
+
+.table .edit-btn {
+    color: #3ebb3e;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table .delete-btn {
+    color: #c20404;
+    text-align: center;
+    cursor: pointer;
+}
+
+.delete-btn:active,
+.edit-btn:active {
+    font-weight: 900;
 }
