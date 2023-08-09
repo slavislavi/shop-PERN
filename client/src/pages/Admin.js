@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Image, Table } from 'react-bootstrap';
 import CreateTypeModal from '../components/modals/CreateTypeModal';
 import CreateBrandModal from '../components/modals/CreateBrandModal';
 import CreateDeviceModal from '../components/modals/CreateDeviceModal';
@@ -87,7 +87,7 @@ const Admin = () => {
                 >+</Button>
             </div>
             <div className="products-table-container">
-                <Table striped bordered hover>
+                <Table bordered hover>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -102,7 +102,13 @@ const Admin = () => {
                         {devices.map((device) =>
                             <tr key={device.id}>
                                 <td>{device.id}</td>
-                                <td>{device.img}</td>
+                                <td className="image-cell p-1">
+                                    <Image
+                                        width={50}
+                                        height={50}
+                                        src={process.env.REACT_APP_API_URL + device.img}
+                                    />
+                                </td>
                                 <td>{device.name}</td>
                                 <td>{device.price}</td>
                                 <td>{device.rating}</td>

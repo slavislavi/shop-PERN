@@ -256,3 +256,8 @@
 .edit-btn:active {
     font-weight: 900;
 }
+
+.image-cell {
+    width: 50px;
+    padding: 0;
+}
