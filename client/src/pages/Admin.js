@@ -26,7 +26,7 @@ const Admin = () => {
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
     const openConfirmModalHandler = (entity) => () => {
-        setCurrentEntity({ type: `${entity}`, name: entity.name });
+        setCurrentEntity({ type: `${entity}`, name: entity.name }); // как достать тип?
         setConfirmVisible(true);
     };
 
