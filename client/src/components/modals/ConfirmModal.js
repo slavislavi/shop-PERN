@@ -17,10 +17,10 @@ const ConfirmModal = ({ show, onHide, entity }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {`This ${entity} will be deleted from database. Are you sure?`}
+                {`The ${entity.type} ${entity.name} will be deleted from database. Are you sure?`}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-danger" onClick={deleteHandler[entity]}>Delete</Button>
+                <Button variant="outline-danger" onClick={deleteHandler[entity.type]}>Delete</Button>
             </Modal.Footer>
         </Modal>
     );

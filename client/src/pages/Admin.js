@@ -14,6 +14,7 @@ const Admin = () => {
     const [brandVisible, setBrandVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
     const [confirmVisible, setConfirmVisible] = useState(false);
+    const [currentEntity, setCurrentEntity] = useState({ type: '', name: '' });
 
     const types = useSelector(getTypes);
     const brands = useSelector(getBrands);
@@ -24,12 +25,21 @@ const Admin = () => {
     const openTypeModalHandler = () => setTypeVisible(true);
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
-    const openConfirmModalHandler = () => setConfirmVisible(true);
+    const openConfirmModalHandler = (entity) => () => {
+        setCurrentEntity({ type: `${entity}`, name: entity.name });
+        setConfirmVisible(true);
+    };
 
-    const closeTypeModalHandler = () => setTypeVisible(false);
-    const closeBrandModalHandler = () => setBrandVisible(false);
-    const closeDeviceModalHandler = () => setDeviceVisible(false);
-    const closeConfirmModalHandler = () => setConfirmVisible(false);
+    const closeModalHandler = () => {
+        setTypeVisible(false);
+        setBrandVisible(false);
+        setDeviceVisible(false);
+    };
+
+    const closeConfirmModalHandler = () => {
+        setConfirmVisible(false);
+        setCurrentEntity({ type: '', name: '' });
+    };
 
     useEffect(() => {
         fetchDevices(null, null, null, null, true).then((data) => {
@@ -37,7 +47,7 @@ const Admin = () => {
             dispatch(deviceActions.setTotalCount(data.count));
         });
     }, [dispatch]);
-
+    console.log(currentEntity);
     return (
         <div className="page-container p-0 admin-container">
             <div className="types-table-container">
@@ -52,7 +62,12 @@ const Admin = () => {
                             <tr key={type.id}>
                                 <td>{type.name}</td>
                                 <td className="edit-btn">&#8634;</td>
-                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                                <td
+                                    className="delete-btn"
+                                    onClick={openConfirmModalHandler(type)}
+                                >
+                                    &#x2715;
+                                </td>
                             </tr>
                         )}
                     </tbody>
@@ -75,7 +90,12 @@ const Admin = () => {
                             <tr key={brand.id}>
                                 <td>{brand.name}</td>
                                 <td className="edit-btn">&#8634;</td>
-                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                                <td
+                                    className="delete-btn"
+                                    onClick={openConfirmModalHandler(brand)}
+                                >
+                                    &#x2715;
+                                </td>
                             </tr>
                         )}
                     </tbody>
@@ -113,7 +133,12 @@ const Admin = () => {
                                 <td>{device.price}</td>
                                 <td>{device.rating}</td>
                                 <td className="edit-btn">&#8634;</td>
-                                <td className="delete-btn" onClick={openConfirmModalHandler}>&#x2715;</td>
+                                <td
+                                    className="delete-btn"
+                                    onClick={openConfirmModalHandler(device)}
+                                >
+                                    &#x2715;
+                                </td>
                             </tr>
                         )}
                     </tbody>
@@ -125,13 +150,13 @@ const Admin = () => {
                 >+</Button>
             </div>
 
-            <CreateTypeModal show={typeVisible} onHide={closeTypeModalHandler} />
-            <CreateBrandModal show={brandVisible} onHide={closeBrandModalHandler} />
-            <CreateDeviceModal show={deviceVisible} onHide={closeDeviceModalHandler} />
+            <CreateTypeModal show={typeVisible} onHide={closeModalHandler} />
+            <CreateBrandModal show={brandVisible} onHide={closeModalHandler} />
+            <CreateDeviceModal show={deviceVisible} onHide={closeModalHandler} />
             <ConfirmModal
                 show={confirmVisible}
                 onHide={closeConfirmModalHandler}
-                entity={null}
+                entity={currentEntity}
             />
         </div>
 
