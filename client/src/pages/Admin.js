@@ -25,8 +25,8 @@ const Admin = () => {
     const openTypeModalHandler = () => setTypeVisible(true);
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
-    const openConfirmModalHandler = (entity) => () => {
-        setCurrentEntity({ type: `${entity}`, name: entity.name }); // как достать тип?
+    const openConfirmModalHandler = (entity) => (e) => {
+        setCurrentEntity({ type: e.target.dataset.type, name: entity.name });
         setConfirmVisible(true);
     };
 
@@ -64,6 +64,7 @@ const Admin = () => {
                                 <td className="edit-btn">&#8634;</td>
                                 <td
                                     className="delete-btn"
+                                    data-type="type"
                                     onClick={openConfirmModalHandler(type)}
                                 >
                                     &#x2715;
@@ -92,6 +93,7 @@ const Admin = () => {
                                 <td className="edit-btn">&#8634;</td>
                                 <td
                                     className="delete-btn"
+                                    data-type="brand"
                                     onClick={openConfirmModalHandler(brand)}
                                 >
                                     &#x2715;
@@ -135,6 +137,7 @@ const Admin = () => {
                                 <td className="edit-btn">&#8634;</td>
                                 <td
                                     className="delete-btn"
+                                    data-type="device"
                                     onClick={openConfirmModalHandler(device)}
                                 >
                                     &#x2715;
