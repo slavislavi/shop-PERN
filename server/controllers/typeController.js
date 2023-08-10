@@ -42,9 +42,13 @@ class TypeController {
     }
 
     async delete(req, res) {
-        const { id } = req.body;
-        const type = await Type.destroy({ where: { id } });
-        return res.json(type);
+        try {
+            const { id } = req.query;
+            await Type.destroy({ where: { id } });
+            return res.status(200).send('Successfuly deleted type');
+        } catch (e) {
+            return res.status(500).send({ message: 'There was an error deleting the type' });
+        }
     }
 }
 

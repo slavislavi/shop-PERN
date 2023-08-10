@@ -13,7 +13,7 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
         variant: 'success'
     };
     const error = (e) => ({
-        message: `${e.message}. ${e.response?.data?.message}`,
+        message: e.response.data.message,
         variant: 'danger'
     });
 
@@ -21,7 +21,10 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
         type: () => {
             deleteType(id)
                 .then((data) => dispatch(notificationActions.setNotification(success)))
-                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
+                .catch((e) => {
+                    console.log(e);
+                    dispatch(notificationActions.setNotification(error(e)));
+                })
                 .finally(() => onHide());
         },
         brand: () => {
