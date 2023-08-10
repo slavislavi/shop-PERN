@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-// this middleware runs when you press "add device"
+
 module.exports = function (role) {
     return function (req, res, next) {
         if (req.method === 'OPTIONS') {

@@ -4,7 +4,7 @@ import { Button, Image, Table } from 'react-bootstrap';
 import CreateTypeModal from '../components/modals/CreateTypeModal';
 import CreateBrandModal from '../components/modals/CreateBrandModal';
 import CreateDeviceModal from '../components/modals/CreateDeviceModal';
-import ConfirmModal from '../components/modals/ConfirmModal';
+import ConfirmDeleteModal from '../components/modals/ConfirmDeleteModal';
 import { getBrands, getDevices, getTypes } from '../store/selectors/deviceSelectors';
 import { fetchDevices } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
@@ -14,7 +14,7 @@ const Admin = () => {
     const [brandVisible, setBrandVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
     const [confirmVisible, setConfirmVisible] = useState(false);
-    const [currentEntity, setCurrentEntity] = useState({ type: '', name: '' });
+    const [currentEntity, setCurrentEntity] = useState({ type: '', name: '', id: null });
 
     const types = useSelector(getTypes);
     const brands = useSelector(getBrands);
@@ -26,7 +26,7 @@ const Admin = () => {
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
     const openConfirmModalHandler = (entity) => (e) => {
-        setCurrentEntity({ type: e.target.dataset.type, name: entity.name });
+        setCurrentEntity({ type: e.target.dataset.type, name: entity.name, id: entity.id });
         setConfirmVisible(true);
     };
 
@@ -38,7 +38,7 @@ const Admin = () => {
 
     const closeConfirmModalHandler = () => {
         setConfirmVisible(false);
-        setCurrentEntity({ type: '', name: '' });
+        setCurrentEntity({ type: '', name: '', id: null });
     };
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const Admin = () => {
             dispatch(deviceActions.setTotalCount(data.count));
         });
     }, [dispatch]);
-    console.log(currentEntity);
+
     return (
         <div className="page-container p-0 admin-container">
             <div className="types-table-container">
@@ -156,7 +156,7 @@ const Admin = () => {
             <CreateTypeModal show={typeVisible} onHide={closeModalHandler} />
             <CreateBrandModal show={brandVisible} onHide={closeModalHandler} />
             <CreateDeviceModal show={deviceVisible} onHide={closeModalHandler} />
-            <ConfirmModal
+            <ConfirmDeleteModal
                 show={confirmVisible}
                 onHide={closeConfirmModalHandler}
                 entity={currentEntity}

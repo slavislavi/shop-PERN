@@ -10,13 +10,13 @@ export const fetchTypes = async () => {
     return data;
 };
 
-export const updateType = async (id, type) => { // NOT SURE
-    const { data } = await $authHost.put('api/type' + id, type);
+export const updateType = async (id, type) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.put(`api/type/${id}`, type);
     return data;
 };
 
-export const deleteType = async (id) => { // NOT SURE
-    const { data } = await $authHost.delete('api/type' + id);
+export const deleteType = async (id) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.delete(`api/type/${id}`);
     return data;
 };
 
@@ -30,13 +30,13 @@ export const fetchBrands = async () => {
     return data;
 };
 
-export const updateBrand = async (id, brand) => { // NOT SURE
-    const { data } = await $authHost.put('api/brand' + id, brand);
+export const updateBrand = async (id, brand) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.put(`api/brand/${id}`, brand);
     return data;
 };
 
-export const deleteBrand = async (id) => { // NOT SURE
-    const { data } = await $authHost.delete('api/brand' + id);
+export const deleteBrand = async (id) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.delete(`api/brand/${id}`);
     return data;
 };
 
@@ -55,16 +55,16 @@ export const fetchDevices = async (typeId, brandId, page, limit, isAdminList) =>
 };
 
 export const fetchOneDevice = async (id) => {
-    const { data } = await $host.get('api/device/' + id);
+    const { data } = await $host.get(`api/device/${id}`);
     return data;
 };
 
-export const updateDevice = async (id, device) => { // NOT SURE
-    const { data } = await $authHost.put('api/brand' + id, device);
+export const updateDevice = async (id, device) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.put(`api/device/${id}`, device);
     return data;
 };
 
-export const deleteDevice = async (id) => { // NOT SURE
-    const { data } = await $authHost.delete('api/device' + id);
+export const deleteDevice = async (id) => { // NOT SURE NOT SURE NOT SURE
+    const { data } = await $authHost.delete(`api/device/${id}`);
     return data;
 };
