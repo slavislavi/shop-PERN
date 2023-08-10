@@ -13,7 +13,7 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
         variant: 'success'
     };
     const error = (e) => ({
-        message: `${e.message}. ${e.response.data.message}`,
+        message: `${e.message}. ${e.response?.data?.message}`,
         variant: 'danger'
     });
 
