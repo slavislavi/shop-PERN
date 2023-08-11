@@ -261,3 +261,9 @@
     width: 50px;
     padding: 0;
 }
+
+/* Confirmation modal */
+.confirm-text {
+    font-weight: 700;
+    color: #3ebb3e;
+}

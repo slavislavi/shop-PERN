@@ -17,14 +17,15 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
         variant: 'danger'
     });
 
+    const confirmationText = () => (
+        <p>The {type} <span className="confirm-text">{name}</span> will be deleted from database. Are you sure?</p>
+    );
+
     const deleteHandler = {
         type: () => {
             deleteType(id)
                 .then((data) => dispatch(notificationActions.setNotification(success)))
-                .catch((e) => {
-                    console.log(e);
-                    dispatch(notificationActions.setNotification(error(e)));
-                })
+                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
                 .finally(() => onHide());
         },
         brand: () => {
@@ -49,7 +50,7 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {`The ${type} ${name} will be deleted from database. Are you sure?`}
+                {confirmationText()}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={deleteHandler[type]}>Delete</Button>

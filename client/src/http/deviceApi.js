@@ -15,7 +15,7 @@ export const updateType = async (id, type) => { // NOT SURE NOT SURE NOT SURE
     return data;
 };
 
-export const deleteType = async (id) => { // NOT SURE NOT SURE NOT SURE
+export const deleteType = async (id) => {
     const { data } = await $authHost.delete(`api/type/${id}`);
     return data;
 };
@@ -35,7 +35,7 @@ export const updateBrand = async (id, brand) => { // NOT SURE NOT SURE NOT SURE
     return data;
 };
 
-export const deleteBrand = async (id) => { // NOT SURE NOT SURE NOT SURE
+export const deleteBrand = async (id) => {
     const { data } = await $authHost.delete(`api/brand/${id}`);
     return data;
 };
@@ -64,7 +64,7 @@ export const updateDevice = async (id, device) => { // NOT SURE NOT SURE NOT SUR
     return data;
 };
 
-export const deleteDevice = async (id) => { // NOT SURE NOT SURE NOT SURE
+export const deleteDevice = async (id) => {
     const { data } = await $authHost.delete(`api/device/${id}`);
     return data;
 };
