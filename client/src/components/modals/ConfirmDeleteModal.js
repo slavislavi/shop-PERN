@@ -25,37 +25,37 @@ const ConfirmDeleteModal = ({ show, onHide, entity }) => {
     const deleteHandler = {
         type: () => {
             deleteType(id)
-                .then((data) => dispatch(notificationActions.setNotification(success)))
-                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
-                .finally(() => {
+                .then((data) => {
+                    dispatch(notificationActions.setNotification(success));
                     fetchTypes().then((data) => {
                         dispatch(deviceActions.setTypes(data));
                     });
-                    onHide();
-                });
+                })
+                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
+                .finally(() => onHide());
         },
         brand: () => {
             deleteBrand(id)
-                .then((data) => dispatch(notificationActions.setNotification(success)))
-                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
-                .finally(() => {
+                .then((data) => {
+                    dispatch(notificationActions.setNotification(success));
                     fetchBrands().then((data) => {
                         dispatch(deviceActions.setBrands(data));
                     });
-                    onHide();
-                });
+                })
+                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
+                .finally(() => onHide());
         },
         device: () => {
             deleteDevice(id)
-                .then((data) => dispatch(notificationActions.setNotification(success)))
-                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
-                .finally(() => {
+                .then((data) => {
+                    dispatch(notificationActions.setNotification(success));
                     fetchDevices(null, null, null, null, true).then((data) => {
                         dispatch(deviceActions.setDevices(data.rows));
                         dispatch(deviceActions.setTotalCount(data.count));
                     });
-                    onHide();
-                });
+                })
+                .catch((e) => dispatch(notificationActions.setNotification(error(e))))
+                .finally(() => onHide());
         },
     }[type];
 
