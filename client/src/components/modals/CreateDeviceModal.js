@@ -4,7 +4,7 @@ import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import { getBrands, getSelectedBrand, getSelectedType, getTypes } from '../../store/selectors/deviceSelectors';
 import { deviceActions } from '../../store/slices/deviceSlice';
 import { notificationActions } from '../../store/slices/notificationSlice';
-import { createDevice, fetchBrands, fetchTypes } from '../../http/deviceApi';
+import { createDevice, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceApi';
 
 const CreateDeviceModal = ({ show, onHide }) => {
     const [name, setName] = useState('');
@@ -53,13 +53,20 @@ const CreateDeviceModal = ({ show, onHide }) => {
         formData.append('typeId', selectedType.id);
         formData.append('info', JSON.stringify(info));
 
-        createDevice(formData).then((data) => {
-            dispatch(notificationActions.setNotification({
-                message: 'New product in database now',
-                variant: 'success'
-            }));
-            onHide();
-        });
+        createDevice(formData)
+            .then((data) => {
+                dispatch(notificationActions.setNotification({
+                    message: 'New device in database now',
+                    variant: 'success'
+                }));
+            })
+            .then(() => {
+                fetchDevices(null, null, null, null, true).then((data) => {
+                    dispatch(deviceActions.setDevices(data.rows));
+                    dispatch(deviceActions.setTotalCount(data.count));
+                });
+                onHide();
+            });
     };
 
     useEffect(() => {
