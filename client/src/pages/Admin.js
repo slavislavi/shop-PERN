@@ -58,7 +58,7 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {types.map((type) =>
+                        {types?.map((type) =>
                             <tr key={type.id}>
                                 <td>{type.name}</td>
                                 <td className="edit-btn">&#8634;</td>
@@ -87,7 +87,7 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {brands.map((brand) =>
+                        {brands?.map((brand) =>
                             <tr key={brand.id}>
                                 <td>{brand.name}</td>
                                 <td className="edit-btn">&#8634;</td>
@@ -121,7 +121,7 @@ const Admin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {devices.map((device) =>
+                        {devices?.map((device) =>
                             <tr key={device.id}>
                                 <td>{device.id}</td>
                                 <td className="image-cell p-1">

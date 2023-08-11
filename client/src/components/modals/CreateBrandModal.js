@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { createBrand } from '../../http/deviceApi';
+import { createBrand, fetchBrands } from '../../http/deviceApi';
 import { notificationActions } from '../../store/slices/notificationSlice';
+import { deviceActions } from '../../store/slices/deviceSlice';
 
 const CreateBrandModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
 
     const addBrand = () => {
-        createBrand({ name: input }).then((data) => {
-            dispatch(notificationActions.setNotification({
-                message: 'New brand in database now',
-                variant: 'success'
-            }));
-            setInput('');
-            onHide();
-        });
+        createBrand({ name: input })
+            .then((data) => {
+                dispatch(notificationActions.setNotification({
+                    message: 'New brand in database now',
+                    variant: 'success'
+                }));
+                setInput('');
+            })
+            .then(() => {
+                fetchBrands().then((data) => {
+                    dispatch(deviceActions.setBrands(data));
+                });
+                onHide();
+            });
     };
 
     const onChangeBrand = (e) => setInput(e.target.value);

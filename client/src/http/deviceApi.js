@@ -1,5 +1,7 @@
 import { $authHost, $host } from "./index";
 
+// TYPES
+
 export const createType = async (type) => {
     const { data } = await $authHost.post('api/type', type);
     return data;
@@ -20,6 +22,8 @@ export const deleteType = async (id) => {
     return data;
 };
 
+// BRANDS
+
 export const createBrand = async (brand) => {
     const { data } = await $authHost.post('api/brand', brand);
     return data;
@@ -39,6 +43,8 @@ export const deleteBrand = async (id) => {
     const { data } = await $authHost.delete(`api/brand/${id}`);
     return data;
 };
+
+// DEVICES
 
 export const createDevice = async (device) => {
     const { data } = await $authHost.post('api/device', device);
