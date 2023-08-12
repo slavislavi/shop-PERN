@@ -3,9 +3,9 @@ const router = new Router();
 const brandController = require('../controllers/brandController');
 const checkRole = require('../middleware/CheckRoleMiddleware');
 
-router.post('/', brandController.create);
-router.put('/:id', brandController.update);
-router.delete('/:id', brandController.delete);
+router.post('/', checkRole('ADMIN'), brandController.create);
+router.put('/:id', checkRole('ADMIN'), brandController.update);
+router.delete('/:id', checkRole('ADMIN'), brandController.delete);
 router.get('/', brandController.getAll);
 router.get('/:id', brandController.getOne);
 

@@ -9,7 +9,7 @@ module.exports = function (role) {
         try {
             const token = req.headers.authorization.split(' ')[1];
 
-            if (!JSON.parse(token)) {
+            if (token === 'null') {
                 return res.status(401).json({ message: 'Not authorized' });
             }
 
