@@ -65,11 +65,11 @@ const Admin = () => {
                         {types?.map((type) =>
                             <tr key={type.id}>
                                 <td>{type.name}</td>
-                                <td className="edit-btn">&#8634;</td>
                                 <td
                                     className="delete-btn"
                                     data-type="type"
                                     onClick={openConfirmModalHandler(type)}
+                                    title="Delete Type"
                                 >
                                     &#x2715;
                                 </td>
@@ -94,11 +94,11 @@ const Admin = () => {
                         {brands?.map((brand) =>
                             <tr key={brand.id}>
                                 <td>{brand.name}</td>
-                                <td className="edit-btn">&#8634;</td>
                                 <td
                                     className="delete-btn"
                                     data-type="brand"
                                     onClick={openConfirmModalHandler(brand)}
+                                    title="Delete Brand"
                                 >
                                     &#x2715;
                                 </td>
@@ -137,12 +137,12 @@ const Admin = () => {
                                 </td>
                                 <td>{device.name}</td>
                                 <td>{device.price}</td>
-                                <td>{device.rating}</td>
-                                <td className="edit-btn">&#8634;</td>
+                                <td className="rating-col">{device.rating}</td>
                                 <td
                                     className="delete-btn"
                                     data-type="device"
                                     onClick={openConfirmModalHandler(device)}
+                                    title="Delete Device"
                                 >
                                     &#x2715;
                                 </td>
