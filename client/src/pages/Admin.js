@@ -26,7 +26,11 @@ const Admin = () => {
     const openBrandModalHandler = () => setBrandVisible(true);
     const openDeviceModalHandler = () => setDeviceVisible(true);
     const openConfirmModalHandler = (entity) => (e) => {
-        setCurrentEntity({ type: e.target.dataset.type, name: entity.name, id: entity.id });
+        setCurrentEntity({
+            type: e.target.dataset.type,
+            name: entity.name,
+            id: entity.id
+        });
         setConfirmVisible(true);
     };
 

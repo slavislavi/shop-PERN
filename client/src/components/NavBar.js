@@ -34,6 +34,7 @@ const NavBar = () => {
                 <Logo size="logo-md" />
                 {isAuth ?
                     <Nav className="ml-auto">
+                        <p className="navbar-username">{user.email}</p>
                         {user?.role === "ADMIN" && <Button
                             variant="outline-light"
                             onClick={toAdminPanelHandler}

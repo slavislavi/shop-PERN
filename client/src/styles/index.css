@@ -73,6 +73,11 @@
     font-size: 64px;
 }
 
+.navbar-username {
+    margin: 0 1rem;
+    line-height: 240%;
+}
+
 /* TypeBar */
 .list-group .list-group-item {
     cursor: pointer;
