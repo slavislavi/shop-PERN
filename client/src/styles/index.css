@@ -277,3 +277,16 @@
     font-weight: 700;
     color: #3ebb3e;
 }
+
+
+/* CreateDeviceModal */
+
+.dropdown-toggle {
+    width: 200px;
+}
+
+.dropdown-menu {
+    width: 200px;
+    max-height: 50vh;
+    overflow: auto;
+}

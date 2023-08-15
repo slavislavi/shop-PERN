@@ -85,10 +85,10 @@ const CreateDeviceModal = ({ show, onHide }) => {
             <Modal.Body>
                 <Form>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>
+                        <Dropdown.Toggle className="dropdown-toggle">
                             {selectedType.name || "Select the type"}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Menu className="dropdown-menu">
                             {types.map((type) =>
                                 <Dropdown.Item
                                     key={type.id}
@@ -101,10 +101,10 @@ const CreateDeviceModal = ({ show, onHide }) => {
                     </Dropdown>
 
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>
+                        <Dropdown.Toggle className="dropdown-toggle">
                             {selectedBrand.name || "Select the brand"}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Menu className="dropdown-menu">
                             {brands.map((brand) =>
                                 <Dropdown.Item
                                     key={brand.id}
