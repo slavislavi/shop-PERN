@@ -85,7 +85,7 @@ const CreateDeviceModal = ({ show, onHide }) => {
             <Modal.Body>
                 <Form>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle className="dropdown-toggle">
+                        <Dropdown.Toggle className="dropdown-toggler">
                             {selectedType.name || "Select the type"}
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="dropdown-menu">
@@ -101,7 +101,7 @@ const CreateDeviceModal = ({ show, onHide }) => {
                     </Dropdown>
 
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle className="dropdown-toggle">
+                        <Dropdown.Toggle className="dropdown-toggler">
                             {selectedBrand.name || "Select the brand"}
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="dropdown-menu">

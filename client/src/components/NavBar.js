@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -16,6 +16,9 @@ const NavBar = () => {
     const user = useSelector(getUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
+
+    const isAdminPage = location.pathname === ADMIN_ROUTE;
 
     const toAdminPanelHandler = () => navigate(ADMIN_ROUTE);
     const toLoginPageHandler = () => navigate(LOGIN_ROUTE);
@@ -38,6 +41,7 @@ const NavBar = () => {
                         {user?.role === "ADMIN" && <Button
                             variant="outline-light"
                             onClick={toAdminPanelHandler}
+                            active={isAdminPage}
                         >
                             Admin Panel
                         </Button>}

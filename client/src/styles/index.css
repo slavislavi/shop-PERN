@@ -96,6 +96,11 @@
     font-weight: 500;
 }
 
+/* DeviceList */
+.device-list-container {
+    margin: 30px;
+}
+
 /* DeviceItem */
 .card.device-card {
     cursor: pointer;
@@ -281,7 +286,7 @@
 
 /* CreateDeviceModal */
 
-.dropdown-toggle {
+.dropdown-toggler {
     width: 200px;
 }
 
