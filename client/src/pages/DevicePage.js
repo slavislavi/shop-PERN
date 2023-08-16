@@ -16,11 +16,10 @@ const DevicePage = () => {
     return (
         <Container className="mt-3 page-container">
             <Row>
-                <Col md={4}>
+                <Col md={5}>
                     <Image
                         src={process.env.REACT_APP_API_URL + device.img}
-                        width={300}
-                        height={300}
+                        className="device-page-image"
                     />
                 </Col>
                 <Col md={4}>
@@ -34,7 +33,7 @@ const DevicePage = () => {
                         </div>
                     </Row>
                 </Col>
-                <Col md={4}>
+                <Col md={3}>
                     <Card
                         className="d-flex flex-column align-items-center justify-content-around"
                         style={{ width: 300, height: 300, fontSize: 32, border: "5px solid lightgray" }}

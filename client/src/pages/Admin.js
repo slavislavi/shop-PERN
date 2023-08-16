@@ -130,9 +130,8 @@ const Admin = () => {
                                 <td>{device.id}</td>
                                 <td className="image-cell p-1">
                                     <Image
-                                        width={50}
-                                        height={50}
                                         src={process.env.REACT_APP_API_URL + device.img}
+                                        className="device-admin-image"
                                     />
                                 </td>
                                 <td>{device.name}</td>
