@@ -25,6 +25,7 @@ const DeviceItem = ({ device }) => {
                     </div>
                 </div>
                 <div>{device.name}</div>
+                <div className="device-price">{device.price} $</div>
             </Card>
         </Col>
     );

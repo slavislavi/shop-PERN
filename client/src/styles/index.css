@@ -112,6 +112,12 @@
     transform: scale(1.05);
 }
 
+.device-price {
+    display: flex;
+    justify-content: end;
+    font-weight: 600;
+}
+
 /* BrandBar */
 .brand-card {
     align-items: center;
