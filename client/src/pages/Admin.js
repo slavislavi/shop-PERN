@@ -5,9 +5,12 @@ import CreateTypeModal from '../components/modals/CreateTypeModal';
 import CreateBrandModal from '../components/modals/CreateBrandModal';
 import CreateDeviceModal from '../components/modals/CreateDeviceModal';
 import ConfirmDeleteModal from '../components/modals/ConfirmDeleteModal';
+import GoToTopButton from '../components/GoToTopButton';
 import { getBrands, getDevices, getTypes } from '../store/selectors/deviceSelectors';
 import { fetchDevices } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
+import { useScroll } from '../utils/helpers';
+import { SCROLL_FROM_TOP } from '../utils/constants';
 
 const Admin = () => {
     const [typeVisible, setTypeVisible] = useState(false);
@@ -20,6 +23,7 @@ const Admin = () => {
     const brands = useSelector(getBrands);
     const devices = useSelector(getDevices);
 
+    const scrollPosition = useScroll();
     const dispatch = useDispatch();
 
     const openTypeModalHandler = () => setTypeVisible(true);
@@ -164,6 +168,7 @@ const Admin = () => {
                 onHide={closeConfirmModalHandler}
                 entity={currentEntity}
             />
+            <GoToTopButton visible={scrollPosition > SCROLL_FROM_TOP} />
         </div>
 
     );
