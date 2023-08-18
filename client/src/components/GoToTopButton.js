@@ -5,11 +5,11 @@ import { scrollToTop } from '../utils/helpers';
 const GoToTopButton = ({ visible = true }) => {
     return (
         <Button
-            className={`go-to-top-btn ${visible && "go-to-top-btn-visible"}`}
+            className={`go-to-top-btn ${visible ? "go-to-top-btn-visible" : ""}`}
             onClick={scrollToTop}
             variant="dark"
         >
-            UP
+            ^
         </Button>
     );
 };

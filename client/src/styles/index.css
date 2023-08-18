@@ -33,22 +33,25 @@
 
 .go-to-top-btn {
     position: fixed;
-    right: 25px;
+    z-index: 10;
+    right: 40px;
     bottom: 25px;
-    border-radius: 50%;
     height: 50px;
     width: 50px;
+    border-radius: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.2s;
+    font-size: 24px;
+    scale: 2 1;
     pointer-events: none;
     opacity: 0;
 }
 
 .go-to-top-btn-visible {
     pointer-events: all;
-    opacity: 1;
+    opacity: 0.7;
 }
 
 /* PaginationBar */

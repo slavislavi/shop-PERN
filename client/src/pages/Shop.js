@@ -11,6 +11,9 @@ import { deviceActions } from '../store/slices/deviceSlice';
 import PaginationBar from '../components/PaginationBar';
 import { getLimit, getPage, getSelectedBrand, getSelectedType, getTotalCount } from '../store/selectors/deviceSelectors';
 import LimitDropdown from '../components/LimitDropdown';
+import GoToTopButton from '../components/GoToTopButton';
+import { useScroll } from '../utils/helpers';
+import { SCROLL_FROM_TOP } from '../utils/constants';
 
 const Shop = () => {
     const page = useSelector(getPage);
@@ -18,6 +21,7 @@ const Shop = () => {
     const totalCount = useSelector(getTotalCount);
     const selectedType = useSelector(getSelectedType);
     const selectedBrand = useSelector(getSelectedBrand);
+    const scrollPosition = useScroll();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -56,6 +60,7 @@ const Shop = () => {
                     />
                 </Col>
             </Row>
+            <GoToTopButton visible={scrollPosition > SCROLL_FROM_TOP} />
         </Container>
     );
 };
