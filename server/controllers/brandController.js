@@ -1,7 +1,8 @@
+const ApiError = require('../error/ApiError');
 const { Brand } = require('../models/models');
 
 class BrandController {
-    async create(req, res) {
+    async create(req, res, next) {
         const { name } = req.body;
         const isExist = await Brand.findOne({ where: { name } });
 

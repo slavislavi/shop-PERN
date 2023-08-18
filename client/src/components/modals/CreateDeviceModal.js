@@ -18,6 +18,15 @@ const CreateDeviceModal = ({ show, onHide }) => {
     const selectedBrand = useSelector(getSelectedBrand);
     const dispatch = useDispatch();
 
+    const successNotification = {
+        message: `Device ${name} in database now`,
+        variant: 'success'
+    };
+    const errorNotification = (e) => ({
+        message: e.response.data.message,
+        variant: 'danger'
+    });
+
     const addInfo = () => {
         setInfo([...info, { title: '', description: '', number: Date.now() }]);
     };
@@ -55,10 +64,7 @@ const CreateDeviceModal = ({ show, onHide }) => {
 
         createDevice(formData)
             .then((data) => {
-                dispatch(notificationActions.setNotification({
-                    message: 'New device in database now',
-                    variant: 'success'
-                }));
+                dispatch(notificationActions.setNotification(successNotification));
             })
             .then(() => {
                 fetchDevices(null, null, null, null, true).then((data) => {
@@ -66,7 +72,8 @@ const CreateDeviceModal = ({ show, onHide }) => {
                     dispatch(deviceActions.setTotalCount(data.count));
                 });
                 onHide();
-            });
+            })
+            .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
     };
 
     useEffect(() => {

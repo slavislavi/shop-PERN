@@ -9,13 +9,19 @@ const CreateBrandModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
 
+    const successNotification = {
+        message: `Brand ${input} in database now`,
+        variant: 'success'
+    };
+    const errorNotification = (e) => ({
+        message: e.response.data.message,
+        variant: 'danger'
+    });
+
     const addBrand = () => {
         createBrand({ name: input })
             .then((data) => {
-                dispatch(notificationActions.setNotification({
-                    message: 'New brand in database now',
-                    variant: 'success'
-                }));
+                dispatch(notificationActions.setNotification(successNotification));
                 setInput('');
             })
             .then(() => {
@@ -23,7 +29,8 @@ const CreateBrandModal = ({ show, onHide }) => {
                     dispatch(deviceActions.setBrands(data));
                 });
                 onHide();
-            });
+            })
+            .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
     };
 
     const onChangeBrand = (e) => setInput(e.target.value);
@@ -46,7 +53,12 @@ const CreateBrandModal = ({ show, onHide }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Close</Button>
-                <Button variant="outline-success" onClick={addBrand}>Add</Button>
+                <Button
+                    variant="outline-success"
+                    onClick={addBrand}
+                >
+                    Add
+                </Button>
             </Modal.Footer>
         </Modal>
     );

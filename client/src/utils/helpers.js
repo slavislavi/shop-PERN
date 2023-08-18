@@ -30,3 +30,9 @@ export const useScroll = () => {
 
     return scrollPosition;
 };
+
+export const validate = (input) => {
+    const currentInput = input.trim();
+    const isEmpty = currentInput.length === 0;
+
+};

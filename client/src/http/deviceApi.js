@@ -12,11 +12,6 @@ export const fetchTypes = async () => {
     return data;
 };
 
-export const updateType = async (id, type) => { // NOT SURE NOT SURE NOT SURE
-    const { data } = await $authHost.put(`api/type/${id}`, type);
-    return data;
-};
-
 export const deleteType = async (id) => {
     const { data } = await $authHost.delete(`api/type/${id}`);
     return data;
@@ -31,11 +26,6 @@ export const createBrand = async (brand) => {
 
 export const fetchBrands = async () => {
     const { data } = await $host.get('api/brand');
-    return data;
-};
-
-export const updateBrand = async (id, brand) => { // NOT SURE NOT SURE NOT SURE
-    const { data } = await $authHost.put(`api/brand/${id}`, brand);
     return data;
 };
 
@@ -62,11 +52,6 @@ export const fetchDevices = async (typeId, brandId, page, limit, isAdminList) =>
 
 export const fetchOneDevice = async (id) => {
     const { data } = await $host.get(`api/device/${id}`);
-    return data;
-};
-
-export const updateDevice = async (id, device) => { // NOT SURE NOT SURE NOT SURE
-    const { data } = await $authHost.put(`api/device/${id}`, device);
     return data;
 };
 

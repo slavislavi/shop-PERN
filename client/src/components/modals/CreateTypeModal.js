@@ -9,13 +9,19 @@ const CreateTypeModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
 
+    const successNotification = {
+        message: `Type ${input} in database now`,
+        variant: 'success'
+    };
+    const errorNotification = (e) => ({
+        message: e.response.data.message,
+        variant: 'danger'
+    });
+
     const addType = () => {
         createType({ name: input })
             .then((data) => {
-                dispatch(notificationActions.setNotification({
-                    message: 'New type in database now',
-                    variant: 'success'
-                }));
+                dispatch(notificationActions.setNotification(successNotification));
                 setInput('');
             })
             .then(() => {
@@ -23,7 +29,8 @@ const CreateTypeModal = ({ show, onHide }) => {
                     dispatch(deviceActions.setTypes(data));
                 });
                 onHide();
-            });
+            })
+            .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
     };
 
     const onChangeType = (e) => setInput(e.target.value);
