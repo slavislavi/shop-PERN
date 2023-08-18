@@ -19,12 +19,14 @@ const PaginationBar = ({ currentPage, limit, totalCount, setCurrentPage }) => {
 
     const onPageNumberClick = (pageNumber) => () => changePage(pageNumber);
 
-    const onPreviousPageClick = () => {
-        changePage(currentPage => currentPage - 1);
+    const onPreviousPageClick = (pageNumber) => () => {
+        const previousPage = pageNumber - 1;
+        changePage(previousPage);
     };
 
-    const onNextPageClick = () => {
-        changePage(currentPage => currentPage + 1);
+    const onNextPageClick = (pageNumber) => () => {
+        const nextPage = pageNumber + 1;
+        changePage(nextPage);
     };
 
     let isPageNumberOutOfRange;
@@ -67,12 +69,12 @@ const PaginationBar = ({ currentPage, limit, totalCount, setCurrentPage }) => {
             {isPaginationShown && (
                 <Pagination className="mt-5 justify-content-center" data-bs-theme="dark">
                     <Pagination.Prev
-                        onClick={onPreviousPageClick}
+                        onClick={onPreviousPageClick(currentPage)}
                         disabled={isCurrentPageFirst}
                     />
                     {pageNumbers}
                     <Pagination.Next
-                        onClick={onNextPageClick}
+                        onClick={onNextPageClick(currentPage)}
                         disabled={isCurrentPageLast}
                     />
                 </Pagination>
