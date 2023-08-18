@@ -8,13 +8,14 @@ import BrandBar from '../components/BrandBar';
 import DeviceList from '../components/DeviceList';
 import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
-import Pages from '../components/Pages';
-import { getLimit, getPage, getSelectedBrand, getSelectedType } from '../store/selectors/deviceSelectors';
+import PaginationBar from '../components/PaginationBar';
+import { getLimit, getPage, getSelectedBrand, getSelectedType, getTotalCount } from '../store/selectors/deviceSelectors';
 import LimitDropdown from '../components/LimitDropdown';
 
 const Shop = () => {
     const page = useSelector(getPage);
     const limit = useSelector(getLimit);
+    const totalCount = useSelector(getTotalCount);
     const selectedType = useSelector(getSelectedType);
     const selectedBrand = useSelector(getSelectedBrand);
     const dispatch = useDispatch();
@@ -35,6 +36,8 @@ const Shop = () => {
         });
     }, [dispatch, limit, page, selectedBrand, selectedType]);
 
+    const setCurrentPage = (pageNumber) => dispatch(deviceActions.setPage(pageNumber));
+
     return (
         <Container className="page-container">
             <Row>
@@ -45,7 +48,12 @@ const Shop = () => {
                 <Col md={9}>
                     <BrandBar />
                     <DeviceList />
-                    <Pages />
+                    <PaginationBar
+                        currentPage={page}
+                        limit={limit}
+                        totalCount={totalCount}
+                        setCurrentPage={setCurrentPage}
+                    />
                 </Col>
             </Row>
         </Container>

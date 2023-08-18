@@ -47,7 +47,8 @@ class DeviceController {
                     { model: Type, as: 'type' },
                     { model: Brand, as: 'brand' },
                     { model: DeviceInfo, as: 'info' }
-                ]
+                ],
+                distinct: true
             });
         }
 
@@ -57,7 +58,8 @@ class DeviceController {
                     { model: Type, as: 'type' },
                     { model: Brand, as: 'brand' },
                     { model: DeviceInfo, as: 'info' }
-                ]
+                ],
+                distinct: true
             });
         }
 
@@ -67,7 +69,8 @@ class DeviceController {
                     { model: Type, as: 'type' },
                     { model: Brand, as: 'brand' },
                     { model: DeviceInfo, as: 'info' }
-                ]
+                ],
+                distinct: true
             });
         }
 
@@ -77,7 +80,8 @@ class DeviceController {
                     { model: Type, as: 'type' },
                     { model: Brand, as: 'brand' },
                     { model: DeviceInfo, as: 'info' }
-                ]
+                ],
+                distinct: true
             });
         }
 

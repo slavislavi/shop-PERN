@@ -31,7 +31,7 @@
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
-/* Pages */
+/* PaginationBar */
 .pagination .page-item .page-link {
     color: var(--bs-gray-300);
     border: none;
@@ -40,6 +40,10 @@
 .pagination .page-item.active .page-link {
     color: var(--bs-dark-bg-subtle);
     background-color: var(--bs-gray-300);
+}
+
+.muted {
+    pointer-events: none;
 }
 
 /* NavBar */

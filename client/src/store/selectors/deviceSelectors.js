@@ -8,7 +8,7 @@ export const getSelectedBrand = (state) => state.device.selectedBrand || {};
 
 export const getDevices = (state) => state.device.devices || [];
 
-export const getPage = (state) => state.device.page;
+export const getPage = (state) => state.device.page || 1;
 
 export const getTotalCount = (state) => state.device.totalCount;
 
