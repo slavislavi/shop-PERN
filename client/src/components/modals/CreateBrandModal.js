@@ -4,13 +4,17 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { createBrand, fetchBrands } from '../../http/deviceApi';
 import { notificationActions } from '../../store/slices/notificationSlice';
 import { deviceActions } from '../../store/slices/deviceSlice';
+import { refineInput } from '../../utils/helpers';
 
 const CreateBrandModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
 
+    const refinedInput = refineInput(input);
+    const isAddButtonDisabled = !(input.length);
+
     const successNotification = {
-        message: `Brand ${input} in database now`,
+        message: `Brand ${refinedInput} in database now`,
         variant: 'success'
     };
     const errorNotification = (e) => ({
@@ -19,7 +23,7 @@ const CreateBrandModal = ({ show, onHide }) => {
     });
 
     const addBrand = () => {
-        createBrand({ name: input })
+        createBrand({ name: refinedInput })
             .then((data) => {
                 dispatch(notificationActions.setNotification(successNotification));
                 setInput('');
@@ -56,6 +60,7 @@ const CreateBrandModal = ({ show, onHide }) => {
                 <Button
                     variant="outline-success"
                     onClick={addBrand}
+                    disabled={isAddButtonDisabled}
                 >
                     Add
                 </Button>

@@ -31,8 +31,7 @@ export const useScroll = () => {
     return scrollPosition;
 };
 
-export const validate = (input) => {
-    const currentInput = input.trim();
-    const isEmpty = currentInput.length === 0;
-
+export const refineInput = (input) => {
+    const currentInput = input.replace(/\s\s+/g, ' ').trim();
+    return currentInput;
 };

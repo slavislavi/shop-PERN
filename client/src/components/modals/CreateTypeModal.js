@@ -4,13 +4,17 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { createType, fetchTypes } from '../../http/deviceApi';
 import { notificationActions } from '../../store/slices/notificationSlice';
 import { deviceActions } from '../../store/slices/deviceSlice';
+import { refineInput } from '../../utils/helpers';
 
 const CreateTypeModal = ({ show, onHide }) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
 
+    const refinedInput = refineInput(input);
+    const isAddButtonDisabled = !(input.length);
+
     const successNotification = {
-        message: `Type ${input} in database now`,
+        message: `Type ${refinedInput} in database now`,
         variant: 'success'
     };
     const errorNotification = (e) => ({
@@ -19,7 +23,7 @@ const CreateTypeModal = ({ show, onHide }) => {
     });
 
     const addType = () => {
-        createType({ name: input })
+        createType({ name: refinedInput })
             .then((data) => {
                 dispatch(notificationActions.setNotification(successNotification));
                 setInput('');
@@ -53,7 +57,13 @@ const CreateTypeModal = ({ show, onHide }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Close</Button>
-                <Button variant="outline-success" onClick={addType}>Add</Button>
+                <Button
+                    variant="outline-success"
+                    onClick={addType}
+                    disabled={isAddButtonDisabled}
+                >
+                    Add
+                </Button>
             </Modal.Footer>
         </Modal>
     );

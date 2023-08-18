@@ -10,6 +10,10 @@ class BrandController {
             return next(ApiError.badRequest('Brand with this name already exists'));
         }
 
+        if (!(name.trim().length)) {
+            return next(ApiError.badRequest('Name must be not empty'));
+        }
+
         const brand = await Brand.create({ name });
         return res.json(brand);
     }

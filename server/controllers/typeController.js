@@ -10,6 +10,10 @@ class TypeController {
             return next(ApiError.badRequest('Type with this name already exists'));
         }
 
+        if (!(name.trim().length)) {
+            return next(ApiError.badRequest('Name must be not empty'));
+        }
+
         const type = await Type.create({ name });
         return res.json(type);
     }

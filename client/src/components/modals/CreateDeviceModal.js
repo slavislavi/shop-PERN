@@ -5,6 +5,7 @@ import { getBrands, getSelectedBrand, getSelectedType, getTypes } from '../../st
 import { deviceActions } from '../../store/slices/deviceSlice';
 import { notificationActions } from '../../store/slices/notificationSlice';
 import { createDevice, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceApi';
+import { refineInput } from '../../utils/helpers';
 
 const CreateDeviceModal = ({ show, onHide }) => {
     const [name, setName] = useState('');
@@ -18,8 +19,11 @@ const CreateDeviceModal = ({ show, onHide }) => {
     const selectedBrand = useSelector(getSelectedBrand);
     const dispatch = useDispatch();
 
+    const refinedInputName = refineInput(name);
+    const isAddButtonDisabled = !(name.length && price > 0);
+
     const successNotification = {
-        message: `Device ${name} in database now`,
+        message: `Device ${refinedInputName} in database now`,
         variant: 'success'
     };
     const errorNotification = (e) => ({
@@ -55,7 +59,7 @@ const CreateDeviceModal = ({ show, onHide }) => {
 
     const addDevice = () => {
         const formData = new FormData();
-        formData.append('name', name);
+        formData.append('name', refinedInputName);
         formData.append('price', `${price}`);
         formData.append('img', file);
         formData.append('brandId', selectedBrand.id);
@@ -181,7 +185,13 @@ const CreateDeviceModal = ({ show, onHide }) => {
 
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Close</Button>
-                <Button variant="outline-success" onClick={addDevice}>Add</Button>
+                <Button
+                    variant="outline-success"
+                    onClick={addDevice}
+                    disabled={isAddButtonDisabled}
+                >
+                    Add
+                </Button>
             </Modal.Footer>
         </Modal>
     );
