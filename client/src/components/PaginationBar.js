@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Pagination } from 'react-bootstrap';
-import { scrollToTop } from '../utils/helpers';
 
 const PaginationBar = ({ currentPage, limit, totalCount, setCurrentPage }) => {
     const pagesCount = Math.ceil(totalCount / limit);
@@ -14,7 +13,6 @@ const PaginationBar = ({ currentPage, limit, totalCount, setCurrentPage }) => {
             return;
         };
         setCurrentPage(number);
-        scrollToTop();
     };
 
     const onPageNumberClick = (pageNumber) => () => changePage(pageNumber);
