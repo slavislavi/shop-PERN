@@ -25,6 +25,6 @@ export const check = async () => {
         localStorage.setItem('token', data.token);
         return jwt_decode(data.token);
     } catch (e) {
-        console.log('[http/userApi/check]:', e);
+        console.log('[http/userApi/check]:', e.response.data.message);
     }
 };
