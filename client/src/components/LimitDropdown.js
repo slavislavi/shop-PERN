@@ -11,7 +11,7 @@ const LimitDropdown = () => {
 
     return (
         <Dropdown
-            className="mt-4"
+            className="mt-4 mb-4"
             as={ButtonGroup}
             data-bs-theme="dark"
         >

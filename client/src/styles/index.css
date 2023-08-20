@@ -54,6 +54,12 @@
     opacity: 0.5;
 }
 
+.no-products-text {
+    text-align: center;
+    margin-top: 5rem;
+    color: var(--bs-gray-500);
+}
+
 /* PaginationBar */
 .pagination .page-item .page-link {
     color: var(--bs-gray-300);

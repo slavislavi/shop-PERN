@@ -22,6 +22,8 @@ const Shop = () => {
     const selectedType = useSelector(getSelectedType);
     const selectedBrand = useSelector(getSelectedBrand);
     const scrollPosition = useScroll();
+
+    const hasDevicesOnPage = totalCount > 0;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -51,7 +53,9 @@ const Shop = () => {
                 </Col>
                 <Col md={9}>
                     <BrandBar />
-                    <DeviceList />
+                    {hasDevicesOnPage
+                        ? <DeviceList />
+                        : <h3 className="no-products-text">Products will be added soon</h3>}
                     <PaginationBar
                         currentPage={page}
                         limit={limit}
