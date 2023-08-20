@@ -169,6 +169,26 @@
     object-fit: contain;
 }
 
+.infoRow {
+    width: 60%;
+    min-width: 460px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.infoRow div {
+    width: auto;
+}
+
+.infoRow:nth-child(even) {
+    background: lightgray;
+}
+
+.details-text {
+    margin: 2rem 0;
+    padding: 0 8px;
+}
+
 /* BrandBar */
 .brand-card {
     align-items: center;

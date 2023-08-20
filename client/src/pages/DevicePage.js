@@ -48,14 +48,12 @@ const DevicePage = () => {
                     </Card>
                 </Col>
             </Row>
-            <Row className="d-flex flex-column m-3">
-                <h1>Details:</h1>
-                {device.info.map((info, index) =>
-                    <Row
-                        key={info.id}
-                        style={{ background: !(index % 2) && "lightgray", padding: 10 }}
-                    >
-                        {info.title}: {info.description}
+            <Row className="d-flex flex-column m-3 mb-5">
+                <h2 className="details-text">Details:</h2>
+                {device.info.map((info) =>
+                    <Row key={info.id} className="infoRow">
+                        <div>{info.title}:</div>
+                        <div>{info.description}</div>
                     </Row>
                 )}
             </Row>
