@@ -1,8 +1,8 @@
 const ApiError = require('../error/ApiError');
 const { Brand } = require('../models/models');
 
-class BrandController {
-    async create(req, res, next) {
+class BasketController {
+    async addToBasket(req, res, next) {
         const { name } = req.body;
         const isExist = await Brand.findOne({ where: { name } });
 
@@ -18,23 +18,12 @@ class BrandController {
         return res.json(brand);
     }
 
-    async getAll(req, res) {
+    async getBasketItemsByUser(req, res) {
         const brands = await Brand.findAll();
         return res.json(brands);
     }
 
-    async getOne(req, res) {
-        const { id } = req.params;
-        const brand = await Brand.findOne(
-            {
-                where: { id },
-            }
-        );
-
-        return res.json(brand);
-    }
-
-    async delete(req, res) {
+    async deleteBasketItemsByUser(req, res) {
         try {
             const { id } = req.params;
             const deleted = await Brand.destroy({ where: { id } });
@@ -45,4 +34,4 @@ class BrandController {
     }
 }
 
-module.exports = new BrandController();
+module.exports = new BasketController();

@@ -13,3 +13,5 @@ export const getPage = (state) => state.device.page || 1;
 export const getTotalCount = (state) => state.device.totalCount;
 
 export const getLimit = (state) => state.device.limit;
+
+export const getBasketItems = (state) => state.device.basketItems || [];

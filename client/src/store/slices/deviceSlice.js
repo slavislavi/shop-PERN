@@ -8,7 +8,8 @@ const initialState = {
     devices: [],
     page: 1,
     totalCount: 0,
-    limit: 8
+    limit: 8,
+    basketItems: []
 };
 
 export const deviceSlice = createSlice({
@@ -40,6 +41,9 @@ export const deviceSlice = createSlice({
         },
         setLimit: (state, action) => {
             state.limit = action.payload;
+        },
+        setBasketItems: (state, action) => {
+            state.basketItems = action.payload;
         },
     },
 });

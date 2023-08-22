@@ -34,17 +34,6 @@ class TypeController {
         return res.json(type);
     }
 
-    async update(req, res) {
-        const { id, name } = req.body;
-        const type = await Type.update({
-            name: name,
-        },
-            {
-                where: { id }
-            });
-        res.json(type);
-    }
-
     async delete(req, res) {
         try {
             const { id } = req.params;
