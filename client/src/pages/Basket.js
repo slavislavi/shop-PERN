@@ -7,7 +7,7 @@ import { getBasketItems } from '../store/selectors/deviceSelectors';
 
 const Basket = () => {
     const basketItems = useSelector(getBasketItems);
-    console.log(basketItems);
+
     const dispatch = useDispatch();
 
     useEffect(() => {

@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE } from '../utils/constants';
 import { getIsAuth, getUser } from '../store/selectors/userSelectors';
+import { getBasketItems } from '../store/selectors/deviceSelectors';
 import { userActions } from '../store/slices/userSlice';
 import { notificationActions } from '../store/slices/notificationSlice';
 import Logo from './Logo';
@@ -14,6 +15,8 @@ import Logo from './Logo';
 const NavBar = () => {
     const isAuth = useSelector(getIsAuth);
     const user = useSelector(getUser);
+    const basketItems = useSelector(getBasketItems);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
@@ -32,8 +35,6 @@ const NavBar = () => {
             message: 'Good bye',
         }));
     };
-
-    const BADGE = 4;
 
     return (
         <Navbar bg="dark" data-bs-theme="dark">
@@ -55,7 +56,9 @@ const NavBar = () => {
                             onClick={toBasketPageHandler}
                         >
                             Cart
-                            {BADGE > 0 && <div className="basket-btn-badge">{BADGE}</div>}
+                            {basketItems.length > 0 &&
+                                <div className="basket-btn-badge">{basketItems.length}</div>
+                            }
                         </Button>
                         <Button
                             variant="outline-light"
