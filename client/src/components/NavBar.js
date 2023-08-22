@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { ADMIN_ROUTE, LOGIN_ROUTE } from '../utils/constants';
+import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE } from '../utils/constants';
 import { getIsAuth, getUser } from '../store/selectors/userSelectors';
 import { userActions } from '../store/slices/userSlice';
 import { notificationActions } from '../store/slices/notificationSlice';
@@ -22,6 +22,8 @@ const NavBar = () => {
 
     const toAdminPanelHandler = () => navigate(ADMIN_ROUTE);
     const toLoginPageHandler = () => navigate(LOGIN_ROUTE);
+    const toBasketPageHandler = () => navigate(BASKET_ROUTE);
+
     const logoutHandler = () => {
         dispatch(userActions.setUser({}));
         dispatch(userActions.setIsAuth(false));
@@ -30,6 +32,8 @@ const NavBar = () => {
             message: 'Good bye',
         }));
     };
+
+    const BADGE = 4;
 
     return (
         <Navbar bg="dark" data-bs-theme="dark">
@@ -48,10 +52,10 @@ const NavBar = () => {
                         <Button
                             variant="outline-light"
                             className="ms-2 basket-btn"
-                            onClick={() => console.log('cart')}
+                            onClick={toBasketPageHandler}
                         >
                             Cart
-                            <div className="basket-btn-badge">4</div>
+                            {BADGE > 0 && <div className="basket-btn-badge">{BADGE}</div>}
                         </Button>
                         <Button
                             variant="outline-light"
