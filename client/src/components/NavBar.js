@@ -47,6 +47,14 @@ const NavBar = () => {
                         </Button>}
                         <Button
                             variant="outline-light"
+                            className="ms-2 basket-btn"
+                            onClick={() => console.log('cart')}
+                        >
+                            Cart
+                            <div className="basket-btn-badge">4</div>
+                        </Button>
+                        <Button
+                            variant="outline-light"
                             className="ms-2"
                             onClick={logoutHandler}
                         >

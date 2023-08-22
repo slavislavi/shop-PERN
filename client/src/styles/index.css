@@ -111,6 +111,22 @@
     line-height: 240%;
 }
 
+.basket-btn {
+    position: relative;
+}
+
+.basket-btn-badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3d8de9;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 /* TypeBar */
 .list-group .list-group-item {
     cursor: pointer;
