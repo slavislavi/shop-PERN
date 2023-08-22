@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/AuthMiddleware');
 
 router.get('/', authMiddleware, basketController.getBasketItemsByUser);
 router.post('/', authMiddleware, basketController.addToBasket);
-router.delete('/:id', authMiddleware, basketController.deleteBasketItemsByUser);
+router.delete('/:id', authMiddleware, basketController.deleteBasketItemById);
 
 module.exports = router;

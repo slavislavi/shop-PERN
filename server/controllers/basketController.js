@@ -1,35 +1,34 @@
-const ApiError = require('../error/ApiError');
-const { Brand } = require('../models/models');
+const { BasketDevice, Device } = require('../models/models');
 
 class BasketController {
     async addToBasket(req, res, next) {
-        const { name } = req.body;
-        const isExist = await Brand.findOne({ where: { name } });
+        const user = req.user;
+        const { deviceId } = req.body;
+        const basketItem = await BasketDevice.create({
+            basketId: user.id,
+            deviceId: deviceId
+        });
 
-        if (isExist) {
-            return next(ApiError.badRequest('Brand with this name already exists'));
-        }
-
-        if (!(name.trim().length)) {
-            return next(ApiError.badRequest('Name must be not empty'));
-        }
-
-        const brand = await Brand.create({ name });
-        return res.json(brand);
+        return res.json(basketItem);
     }
 
     async getBasketItemsByUser(req, res) {
-        const brands = await Brand.findAll();
-        return res.json(brands);
+        const { id } = req.user;
+        const basketItems = await BasketDevice.findAll({
+            include: { model: Device },
+            where: { basketId: id }
+        });
+
+        return res.json(basketItems);
     }
 
-    async deleteBasketItemsByUser(req, res) {
+    async deleteBasketItemById(req, res) {
         try {
             const { id } = req.params;
-            const deleted = await Brand.destroy({ where: { id } });
-            return res.status(200).send('Successfuly deleted brand');
+            const deleted = await BasketDevice.destroy({ where: { id } });
+            return res.status(200).send('Successfuly removing item');
         } catch (e) {
-            return res.status(500).send({ message: 'There was an error deleting the brand' });
+            return res.status(500).send({ message: 'There was an error removing item' });
         }
     }
 }

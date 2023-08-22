@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/bigStar.png';
 import cart from '../assets/cart.png';
-import { fetchOneDevice } from '../http/deviceApi';
+import { addToBasket, fetchOneDevice } from '../http/deviceApi';
+import { notificationActions } from '../store/slices/notificationSlice';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({ info: [] });
     const { id } = useParams();
+    const dispatch = useDispatch();
+
+    const successNotification = {
+        message: `${device.name} is in the cart`,
+        variant: 'success'
+    };
+
+    const errorNotification = (e) => ({
+        message: e.response.data.message,
+        variant: 'danger'
+    });
+
+    const addToBasketHandler = () => {
+        const formData = new FormData();
+        formData.append('deviceId', id);
+        addToBasket(formData)
+            .then((res) => dispatch(notificationActions.setNotification(successNotification)))
+            .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
+    };
 
     useEffect(() => {
         fetchOneDevice(id).then((data) => setDevice(data));
@@ -40,7 +61,11 @@ const DevicePage = () => {
                     >
                         <h3>{device.price} $</h3>
                         <Row className="d-flex">
-                            <Button variant="outline-dark" style={{ width: "auto" }}>
+                            <Button
+                                variant="outline-dark"
+                                style={{ width: "auto" }}
+                                onClick={addToBasketHandler}
+                            >
                                 Add to cart
                             </Button>
                             <Image src={cart} width={50} height={50} style={{ width: "auto" }} />
