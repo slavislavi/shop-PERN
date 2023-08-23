@@ -49,7 +49,6 @@ const Basket = () => {
                             </div>
                         </Col>
                     </Row>
-
                 </Card>
             )}
         </Container>

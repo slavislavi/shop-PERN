@@ -8,10 +8,6 @@ import { ADMIN_ROUTE, ANY_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, LOGIN_ROUTE, REGIST
 
 export const authRoutes = [
     {
-        path: ADMIN_ROUTE,
-        element: <Admin />
-    },
-    {
         path: BASKET_ROUTE,
         element: <Basket />
     }
@@ -38,4 +34,11 @@ export const publicRoutes = [
         path: ANY_ROUTE,
         element: <Navigate to='/' />
     }
+];
+
+export const adminRoutes = [
+    {
+        path: ADMIN_ROUTE,
+        element: <Admin />
+    },
 ];
