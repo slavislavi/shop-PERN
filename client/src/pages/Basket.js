@@ -4,6 +4,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { getBasket } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 import { getBasketItems } from '../store/selectors/deviceSelectors';
+import Checkbox from '../components/Checkbox';
 
 const Basket = () => {
     const basketItems = useSelector(getBasketItems);
@@ -21,15 +22,12 @@ const Basket = () => {
     }, []);
 
     return (
-        <Container className="page-container d-flex flex-sm-column justify-content-center align-items-center">
-            <h1 className="pb-2">Cart</h1>
-            <Card className="d-flex flex-row p-2 justify-content-between align-items-center mb-2">
-                <h1 className="pe-2">Total price:</h1>
-                <h3 className="ps-2">
-                    {totalPrice}
-                    <span className="font-weight-light ps-2">$</span>
-                </h3>
-            </Card>
+        <Container className="page-container basket-container">
+            <h2>Cart</h2>
+            <p className="basket-total-price">
+                {basketItems.length} item{basketItems.length > 1 && 's'} worth: {totalPrice} $
+            </p>
+            <Checkbox label="Get a discount" />
             {basketItems.map((product) =>
                 <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={product.id}>
                     <Row className="d-flex w-100">

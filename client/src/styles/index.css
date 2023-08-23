@@ -395,3 +395,52 @@
     max-height: 50vh;
     overflow: auto;
 }
+
+/* Basket */
+.basket-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-total-price {
+    margin-bottom: 2rem;
+    color: var(--bs-gray-600);
+    letter-spacing: 0.5px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 0.15em;
+    margin-right: 0.7em;
+    border: 0.15em solid var(--bs-gray-600);
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    display: inline-block;
+    vertical-align: super;
+}
+
+.checkbox-text {
+    color: var(--bs-gray-600);
+}
+
+.checkbox-wrapper input.checked {
+    background-color: #047e00;
+    border-color: #047e00;
+    position: relative;
+}
+
+input.checked::before {
+    content: '✓';
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    position: absolute;
+    right: 1px;
+    top: -10px;
+}
