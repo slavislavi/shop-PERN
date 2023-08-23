@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Checkbox = ({ label, checked, onChange, ...props }) => {
+const Checkbox = ({ label, checked, onCheckedText, notCheckedText, onChange, ...props }) => {
     const defaultChecked = checked ? checked : false;
 
     return (
@@ -15,7 +15,7 @@ const Checkbox = ({ label, checked, onChange, ...props }) => {
                 />
                 <span className="checkbox-label">{label}</span>
                 <p className="checkbox-text">
-                    {defaultChecked ? "Got it!" : "Your discount is 5%"}
+                    {defaultChecked ? onCheckedText : notCheckedText}
                 </p>
             </label>
         </div>

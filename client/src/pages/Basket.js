@@ -7,12 +7,15 @@ import { getBasketItems } from '../store/selectors/deviceSelectors';
 import Checkbox from '../components/Checkbox';
 import cart from '../assets/cart.png';
 
+const DISCOUNT = 5;
+
 const Basket = () => {
     const [hasDiscount, setHasDiscount] = useState(false);
     const basketItems = useSelector(getBasketItems);
     const dispatch = useDispatch();
 
     const totalPrice = basketItems.reduce((acc, { device }) => acc + device.price, 0);
+    const newPrice = Math.ceil(totalPrice - (totalPrice / 100 * DISCOUNT));
 
     const toggleDiscount = () => setHasDiscount((prev) => !prev);
 
@@ -27,11 +30,17 @@ const Basket = () => {
             <div className="total-price-container">
                 <Image src={cart} width={60} height={60} />
                 <p className="basket-total-price">
-                    {basketItems.length} item{basketItems.length > 1 && 's'} worth: <span className={hasDiscount && "price-without-discount"}>{totalPrice}$</span>
-                    {hasDiscount && <span className="price-with-discount">1500$</span>}
+                    {basketItems.length} item{basketItems.length > 1 && "s"} worth: <span className={hasDiscount && "price-without-discount"}>{totalPrice}$</span>
+                    {hasDiscount && <span className="price-with-discount">{newPrice}$</span>}
                 </p>
             </div>
-            <Checkbox checked={hasDiscount} label="Get a discount" onChange={toggleDiscount} />
+            <Checkbox
+                checked={hasDiscount}
+                label="Get a discount"
+                onCheckedText="Got it!"
+                notCheckedText={`Your discount is ${DISCOUNT}%`}
+                onChange={toggleDiscount}
+            />
 
             {basketItems.map(({ id, device }) =>
                 <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={id}>
