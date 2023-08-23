@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { getBasket } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 import { getBasketItems } from '../store/selectors/deviceSelectors';
 import Checkbox from '../components/Checkbox';
+import cart from '../assets/cart.png';
 
 const Basket = () => {
+    const [hasDiscount, setHasDiscount] = useState(false);
     const basketItems = useSelector(getBasketItems);
-
     const dispatch = useDispatch();
 
-    let totalPrice = 0;
-    basketItems.map(price =>
-        totalPrice += Number(price.device.price)
-    );
+    const totalPrice = basketItems.reduce((acc, { device }) => acc + device.price, 0);
+
+    const toggleDiscount = () => setHasDiscount((prev) => !prev);
 
     useEffect(() => {
         getBasket()
@@ -24,26 +24,31 @@ const Basket = () => {
     return (
         <Container className="page-container basket-container">
             <h2>Cart</h2>
-            <p className="basket-total-price">
-                {basketItems.length} item{basketItems.length > 1 && 's'} worth: {totalPrice} $
-            </p>
-            <Checkbox label="Get a discount" />
-            {basketItems.map((product) =>
-                <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={product.id}>
+            <div className="total-price-container">
+                <Image src={cart} width={60} height={60} />
+                <p className="basket-total-price">
+                    {basketItems.length} item{basketItems.length > 1 && 's'} worth: <span className={hasDiscount && "price-without-discount"}>{totalPrice}$</span>
+                    {hasDiscount && <span className="price-with-discount">1500$</span>}
+                </p>
+            </div>
+            <Checkbox checked={hasDiscount} label="Get a discount" onChange={toggleDiscount} />
+
+            {basketItems.map(({ id, device }) =>
+                <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={id}>
                     <Row className="d-flex w-100">
                         <Col>
                             <div className="d-flex flex-row align-items-center">
                                 <img
-                                    src={process.env.REACT_APP_API_URL + product.device.img}
+                                    src={process.env.REACT_APP_API_URL + device.img}
                                     width={50}
-                                    alt={product.device.name}
+                                    alt={device.name}
                                 />
-                                <h1 className="ps-3">{product.device.name}</h1>
+                                <h1 className="ps-3">{device.name}</h1>
                             </div>
                         </Col>
                         <Col>
                             <div className="d-flex h-100 flex-row justify-content-end align-items-center">
-                                <h2 className="font-weight-light">{product.device.price} $</h2>
+                                <h2 className="font-weight-light">{device.price} $</h2>
                             </div>
                         </Col>
                     </Row>
