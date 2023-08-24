@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/bigStar.png';
 import cart from '../assets/cart.png';
-import { addToBasket, fetchOneDevice } from '../http/deviceApi';
+import { addToBasket, fetchOneDevice, getBasket } from '../http/deviceApi';
 import { notificationActions } from '../store/slices/notificationSlice';
+import { deviceActions } from '../store/slices/deviceSlice';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({ info: [] });
@@ -28,6 +29,8 @@ const DevicePage = () => {
         addToBasket(formData)
             .then((res) => dispatch(notificationActions.setNotification(successNotification)))
             .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
+        getBasket()
+            .then((data) => dispatch(deviceActions.setBasketItems(data)));
     };
 
     useEffect(() => {

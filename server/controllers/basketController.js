@@ -4,6 +4,13 @@ class BasketController {
     async addToBasket(req, res, next) {
         const user = req.user;
         const { deviceId } = req.body;
+
+        const candidate = await BasketDevice.findOne({ where: { basketId: user.id, deviceId } });
+
+        if (candidate) {
+            return res.status(400).send({ message: 'This product is already in the cart' });
+        }
+
         const basketItem = await BasketDevice.create({
             basketId: user.id,
             deviceId: deviceId

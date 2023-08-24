@@ -7,15 +7,13 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE } from '../utils/constants';
 import { getIsAuth, getUser } from '../store/selectors/userSelectors';
-import { getBasketItems } from '../store/selectors/deviceSelectors';
 import { userActions } from '../store/slices/userSlice';
 import { notificationActions } from '../store/slices/notificationSlice';
 import Logo from './Logo';
 
-const NavBar = () => {
+const NavBar = ({ basketItems }) => {
     const isAuth = useSelector(getIsAuth);
     const user = useSelector(getUser);
-    const basketItems = useSelector(getBasketItems);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();

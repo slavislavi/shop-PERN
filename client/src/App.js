@@ -8,10 +8,14 @@ import { getNotification } from './store/selectors/notificationSelectors';
 import { check } from './http/userApi';
 import { userActions } from './store/slices/userSlice';
 import { Spinner } from 'react-bootstrap';
+import { getBasketItems } from './store/selectors/deviceSelectors';
+import { getBasket } from './http/deviceApi';
+import { deviceActions } from './store/slices/deviceSlice';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
     const { message, variant } = useSelector(getNotification);
+    const orders = useSelector(getBasketItems);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,6 +25,11 @@ const App = () => {
                 dispatch(userActions.setIsAuth(true));
             }
         }).finally(() => setLoading(false));
+    }, [dispatch]);
+
+    useEffect(() => {
+        getBasket()
+            .then((data) => dispatch(deviceActions.setBasketItems(data)));
     }, [dispatch]);
 
     if (loading) {
@@ -33,7 +42,7 @@ const App = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBar basketItems={orders} />
             <AppRouter />
             <Footer />
             {message && <Notification message={message} variant={variant} />}
