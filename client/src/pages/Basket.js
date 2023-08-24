@@ -16,6 +16,7 @@ const Basket = () => {
 
     const totalPrice = basketItems.reduce((acc, { device }) => acc + device.price, 0);
     const newPrice = Math.ceil(totalPrice - (totalPrice / 100 * DISCOUNT));
+    const strikethroughPrice = hasDiscount ? 'strikethrough-price' : null;
 
     const toggleDiscount = () => setHasDiscount((prev) => !prev);
 
@@ -30,7 +31,7 @@ const Basket = () => {
             <div className="total-price-container">
                 <Image src={cart} width={60} height={60} />
                 <p className="basket-total-price">
-                    {basketItems.length} item{basketItems.length > 1 && "s"} worth: <span className={hasDiscount && "price-without-discount"}>{totalPrice}$</span>
+                    {basketItems.length} item{basketItems.length > 1 && "s"} worth: <span className={strikethroughPrice}>{totalPrice}$</span>
                     {hasDiscount && <span className="price-with-discount">{newPrice}$</span>}
                 </p>
             </div>
