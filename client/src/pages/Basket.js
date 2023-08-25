@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
-import { getBasket } from '../http/deviceApi';
+import { deleteFromBasket, getBasket } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 import { getBasketItems } from '../store/selectors/deviceSelectors';
+import { notificationActions } from '../store/slices/notificationSlice';
 import Checkbox from '../components/Checkbox';
 import cart from '../assets/cart.png';
 
@@ -18,7 +19,19 @@ const Basket = () => {
     const newPrice = Math.ceil(totalPrice - (totalPrice / 100 * DISCOUNT));
     const strikethroughPrice = hasDiscount ? 'strikethrough-price' : null;
 
+    const errorNotification = (e) => ({
+        message: e.response.data.message,
+        variant: 'danger'
+    });
+
     const toggleDiscount = () => setHasDiscount((prev) => !prev);
+
+    const deleteItemFromBasket = (deviceId) => () => {
+        deleteFromBasket(deviceId)
+            .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
+        // getBasket()
+        //     .then((data) => dispatch(deviceActions.setBasketItems(data)));
+    };
 
     useEffect(() => {
         getBasket()
@@ -60,6 +73,7 @@ const Basket = () => {
                                 <Button
                                     className="basket-item-delete-btn"
                                     variant="outline-dark"
+                                    onClick={deleteItemFromBasket(id)}
                                 >
                                     &#x2715;
                                 </Button>
