@@ -31,8 +31,9 @@ class BasketController {
 
     async deleteBasketItemById(req, res) {
         try {
+            const user = req.user;
             const { id } = req.body;
-            const deleted = await BasketDevice.destroy({ where: { id } });
+            const deleted = await BasketDevice.destroy({ where: { basketId: user.id, id } });
             return res.status(200).send('Successfuly removing item');
         } catch (e) {
             return res.status(500).send({ message: 'There was an error removing item' });

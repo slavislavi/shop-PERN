@@ -11,10 +11,12 @@ import { Spinner } from 'react-bootstrap';
 import { getBasketItems } from './store/selectors/deviceSelectors';
 import { getBasket } from './http/deviceApi';
 import { deviceActions } from './store/slices/deviceSlice';
+import { getIsAuth } from './store/selectors/userSelectors';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
     const { message, variant } = useSelector(getNotification);
+    const isAuth = useSelector(getIsAuth);
     const orders = useSelector(getBasketItems);
     const dispatch = useDispatch();
 
@@ -28,9 +30,11 @@ const App = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        getBasket()
-            .then((data) => dispatch(deviceActions.setBasketItems(data)));
-    }, [dispatch]);
+        if (isAuth) {
+            getBasket()
+                .then((data) => dispatch(deviceActions.setBasketItems(data)));
+        }
+    }, [dispatch, isAuth]);
 
     if (loading) {
         return (

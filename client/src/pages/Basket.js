@@ -26,11 +26,12 @@ const Basket = () => {
 
     const toggleDiscount = () => setHasDiscount((prev) => !prev);
 
-    const deleteItemFromBasket = (deviceId) => () => {
-        deleteFromBasket(deviceId)
+    const deleteItemFromBasket = (id) => () => {
+        deleteFromBasket(id)
             .catch((e) => dispatch(notificationActions.setNotification(errorNotification(e))));
-        // getBasket()
-        //     .then((data) => dispatch(deviceActions.setBasketItems(data)));
+        getBasket()
+            .then((data) => dispatch(deviceActions.setBasketItems(data)));
+        console.log(id); // TODO REMOVE LATER
     };
 
     useEffect(() => {
