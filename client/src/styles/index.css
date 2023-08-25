@@ -460,3 +460,36 @@ input.checked::before {
 .price-with-discount {
     color: #047e00;
 }
+
+.basket-list-container {
+    margin-bottom: 3rem;
+}
+
+.basket-item-card {
+    display: flex;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.basket-item-name {
+    font-size: 20px;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.basket-item-price {
+    font-weight: bold;
+    margin: 0;
+}
+
+.basket-item-delete-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basket-item-delete-btn {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+}

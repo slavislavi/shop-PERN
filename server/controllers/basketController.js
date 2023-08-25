@@ -5,9 +5,9 @@ class BasketController {
         const user = req.user;
         const { deviceId } = req.body;
 
-        const candidate = await BasketDevice.findOne({ where: { basketId: user.id, deviceId } });
+        const isExist = await BasketDevice.findOne({ where: { basketId: user.id, deviceId } });
 
-        if (candidate) {
+        if (isExist) {
             return res.status(400).send({ message: 'This product is already in the cart' });
         }
 

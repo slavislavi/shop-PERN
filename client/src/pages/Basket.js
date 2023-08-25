@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { getBasket } from '../http/deviceApi';
 import { deviceActions } from '../store/slices/deviceSlice';
 import { getBasketItems } from '../store/selectors/deviceSelectors';
@@ -23,7 +23,7 @@ const Basket = () => {
     useEffect(() => {
         getBasket()
             .then((data) => dispatch(deviceActions.setBasketItems(data)));
-    }, []);
+    }, [dispatch]);
 
     return (
         <Container className="page-container basket-container">
@@ -42,28 +42,37 @@ const Basket = () => {
                 notCheckedText={`Your discount is ${DISCOUNT}%`}
                 onChange={toggleDiscount}
             />
-
-            {basketItems.map(({ id, device }) =>
-                <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={id}>
-                    <Row className="d-flex w-100">
-                        <Col>
-                            <div className="d-flex flex-row align-items-center">
-                                <img
-                                    src={process.env.REACT_APP_API_URL + device.img}
-                                    width={50}
-                                    alt={device.name}
-                                />
-                                <h1 className="ps-3">{device.name}</h1>
-                            </div>
-                        </Col>
-                        <Col>
-                            <div className="d-flex h-100 flex-row justify-content-end align-items-center">
-                                <h2 className="font-weight-light">{device.price} $</h2>
-                            </div>
-                        </Col>
-                    </Row>
-                </Card>
-            )}
+            <Col md={8} className="basket-list-container">
+                {basketItems.map(({ id, device }) =>
+                    <Card className="basket-item-card" key={id}>
+                        <Row className="d-flex w-100">
+                            <Col md={9}>
+                                <div className="d-flex flex-row align-items-center">
+                                    <img
+                                        src={process.env.REACT_APP_API_URL + device.img}
+                                        width={50}
+                                        alt={device.name}
+                                    />
+                                    <p className="basket-item-name">{device.name}</p>
+                                </div>
+                            </Col>
+                            <Col md={1} className="basket-item-delete-btn-container">
+                                <Button
+                                    className="basket-item-delete-btn"
+                                    variant="outline-dark"
+                                >
+                                    &#x2715;
+                                </Button>
+                            </Col>
+                            <Col md={2}>
+                                <div className="d-flex h-100 flex-row justify-content-end align-items-center">
+                                    <p className="basket-item-price">{device.price} $</p>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Card>
+                )}
+            </Col>
         </Container>
     );
 };
