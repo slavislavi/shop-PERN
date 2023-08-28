@@ -1,7 +1,7 @@
 const { BasketDevice, Device } = require('../models/models');
 
 class BasketController {
-    async addToBasket(req, res, next) {
+    async addToBasket(req, res) {
         const user = req.user;
         const { deviceId } = req.body;
 
@@ -19,7 +19,7 @@ class BasketController {
         return res.json(basketItem);
     }
 
-    async getBasketItemsByUser(req, res) {
+    async getByUser(req, res) {
         const { id } = req.user;
         const basketItems = await BasketDevice.findAll({
             include: { model: Device },
@@ -29,11 +29,11 @@ class BasketController {
         return res.json(basketItems);
     }
 
-    async deleteBasketItemById(req, res) {
+    async delete(req, res) {
         try {
             const user = req.user;
-            const { id } = req.body; // req.params ?
-            const deleted = await BasketDevice.destroy({ where: { basketId: +user.id, id: +id } });
+            const { id } = req.body; // req.params ? query ?
+            const deleted = await BasketDevice.destroy({ where: { basketId: user.id, id } });
             return res.status(200).send('Successfuly removing item');
         } catch (e) {
             return res.status(500).send({ message: 'There was an error removing item' });
