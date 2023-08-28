@@ -28,8 +28,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5);
         const user = await User.create({ email, role, password: hashPassword });
         const basket = await Basket.create({ userId: user.id });
-        const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ token });
+        return res.status(200).json(basket);
     }
 
     async login(req, res, next) {
@@ -45,8 +44,9 @@ class UserController {
             return next(ApiError.internal('Invalid password'));
         }
 
+        const basket = JSON.stringify(await Basket.findOne({ where: { userId: user.id } }));
         const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ token });
+        return res.json({ token, basket });
     }
 
     async check(req, res, next) {
