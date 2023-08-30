@@ -2,6 +2,7 @@ const { User, Basket } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { validationResult } = require("express-validator");
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
