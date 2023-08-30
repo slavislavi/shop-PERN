@@ -1,58 +1,115 @@
-const { User, Basket } = require('../models/models');
 const ApiError = require('../error/ApiError');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { validationResult } = require("express-validator");
-
-const generateJwt = (id, email, role) => {
-    return jwt.sign(
-        { id, email, role },
-        process.env.SECRET_KEY,
-        { expiresIn: '24h' }
-    );
-};
+const { validationResult } = require('express-validator');
+const cookie = require('cookie');
+const userService = require("../service/userService");
 
 class UserController {
     async registration(req, res, next) {
-        const { email, password, role } = req.body;
+        try {
+            const errors = validationResult(req);
 
-        if (!email || !password) {
-            return next(ApiError.badRequest('Invalid email or password'));
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('Validation error', errors.array()));
+            }
+
+            const { email, password, role } = req.body;
+            const userData = await userService.registration(email, password, role);
+
+            res.setHeader(
+                'Set-Cookie',
+                cookie.serialize('refreshToken', userData.refreshToken, {
+                    sameSite: 'none',
+                    secure: true,
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                })
+            );
+            // res.cookie('refreshToken', userData.refreshToken, {
+            //   maxAge: 30 * 24 * 60 * 60 * 1000,
+            //   httpOnly: true,
+            // });
+            return res.json(userData);
+        } catch (err) {
+            next(err);
         }
-
-        const candidate = await User.findOne({ where: { email } });
-
-        if (candidate) {
-            return next(ApiError.badRequest('User with this email already exists'));
-        }
-
-        const hashPassword = await bcrypt.hash(password, 5);
-        const user = await User.create({ email, role, password: hashPassword });
-        const basket = await Basket.create({ id: user.id });
-        return res.status(200).json(basket);
     }
 
     async login(req, res, next) {
-        const { email, password } = req.body;
-        const user = await User.findOne({ where: { email } });
+        try {
+            const { email, password } = req.body;
+            const userData = await userService.login(email, password);
+            // res.cookie("refreshToken", userData.refreshToken, {
+            //   maxAge: 30 * 24 * 60 * 60 * 1000,
+            //   httpOnly: true,
+            // })
 
-        if (!user) {
-            return next(ApiError.internal('User is not found'));
+            res.setHeader(
+                "Set-Cookie",
+                cookie.serialize("refreshToken", userData.refreshToken, {
+                    sameSite: "none",
+                    secure: true,
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                })
+            );
+            return res.json(userData);
+        } catch (e) {
+            next(e);
         }
-
-        let comparePassword = bcrypt.compareSync(password, user.password);
-        if (!comparePassword) {
-            return next(ApiError.internal('Invalid password'));
-        }
-
-        const basket = JSON.stringify(await Basket.findOne({ where: { id: user.id } }));
-        const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ token, basket });
     }
 
-    async check(req, res) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.role);
-        return res.json({ token });
+    async logout(req, res, next) {
+        try {
+            const { refreshToken } = req.cookies;
+            res.setHeader(
+                "Set-Cookie",
+                cookie.serialize("refreshToken", "", {
+                    sameSite: "none",
+                    secure: true,
+                    maxAge: 1,
+                    httpOnly: true,
+                })
+            );
+            const token = await userService.logout(refreshToken);
+            // res.clearCookie("refreshToken");
+            return res.json(token);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async activate(req, res, next) {
+        try {
+            const activationLink = req.params.link;
+            await userService.activate(activationLink);
+            return res.redirect(process.env.CLIENT_URL);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async refresh(req, res, next) {
+        try {
+            const { refreshToken } = req.cookies;
+            const userData = await userService.refresh(refreshToken);
+            // res.cookie("refreshToken", userData.refreshToken, {
+            //   maxAge: 30 * 24 * 60 * 60 * 1000,
+            //   httpOnly: true,
+            // });
+
+            res.setHeader(
+                "Set-Cookie",
+                cookie.serialize("refreshToken", userData.refreshToken, {
+                    sameSite: "none",
+                    secure: true,
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                })
+            );
+            return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
     }
 }
 
