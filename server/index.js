@@ -6,7 +6,7 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const router = require('./routes/index');
 const errorHandler = require('./middleware/ErrorHandleMiddleware');
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 5000;
 
