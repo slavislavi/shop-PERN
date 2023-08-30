@@ -1,7 +1,6 @@
-const ApiError = require("../error/ApiError");
-const { Device, BasketDevice } = require("../models/models");
-const basketService = require("../service/basketService");
-const deviceController = require("./deviceController");
+const ApiError = require('../error/ApiError');
+const { Device, BasketDevice } = require('../models/models');
+const basketService = require('../service/basketService');
 
 class BasketController {
     async addToBasket(req, res, next) {
@@ -49,12 +48,12 @@ class BasketController {
         }
     }
 
-    async delete(req, res, next) {
+    async removeItem(req, res, next) {
         try {
             const { deviceId } = req.body;
 
             if (!deviceId) {
-                throw ApiError.badRequest("Device not found");
+                throw ApiError.badRequest('Device not found');
             }
 
             const deleted = await BasketDevice.destroy({ where: { id: deviceId } });

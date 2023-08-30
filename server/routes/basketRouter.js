@@ -5,6 +5,6 @@ const checkDeleteDeviceFromBasket = require('../middleware/CheckDeleteDeviceFrom
 
 router.get('/', authMiddleware, basketController.getByUser);
 router.post('/', authMiddleware, basketController.addToBasket);
-router.delete('/', authMiddleware, checkDeleteDeviceFromBasket, basketController.delete);
+router.delete('/', authMiddleware, checkDeleteDeviceFromBasket, basketController.removeItem);
 
 module.exports = router;

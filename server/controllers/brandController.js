@@ -37,8 +37,16 @@ class BrandController {
     async delete(req, res) {
         try {
             const { id } = req.params;
-            const deleted = await Brand.destroy({ where: { id } });
-            return res.status(200).send('Successfuly deleted brand');
+
+            await Brand.findOne({ where: { id } }).then(async (data) => {
+                if (data) {
+                    await Brand.destroy({ where: { id } }).then(() => {
+                        return res.status(200).send('Successfuly deleted brand');
+                    });
+                } else {
+                    return res.status(500).send('There is no such brand in the database');
+                }
+            });
         } catch (e) {
             return res.status(500).send({ message: 'There was an error deleting the brand' });
         }
