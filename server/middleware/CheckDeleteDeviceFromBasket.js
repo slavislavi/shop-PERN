@@ -15,7 +15,7 @@ module.exports = async function (req, res, next) {
         if (deviceItem) {
             return next();
         }
-        return res.json("Устройство не найдено в корзине пользователя");
+        return res.json('The device is not found in the cart');
     } catch (e) {
         res.json(e);
     }
