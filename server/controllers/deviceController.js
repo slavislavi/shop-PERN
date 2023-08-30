@@ -1,7 +1,7 @@
 const uuid = require('uuid');
 const path = require('path');
 const ApiError = require('../error/ApiError');
-const { Device, DeviceInfo, Type, Brand } = require('../models/models');
+const { Device, DeviceInfo, Type, Brand, Rating } = require('../models/models');
 
 class DeviceController {
     async create(req, res, next) {
@@ -18,8 +18,8 @@ class DeviceController {
             const device = await Device.create({ name, price, brandId, typeId, info, img: fileName });
 
             if (info) {
-                info = JSON.parse(info);
-                info.forEach(i => DeviceInfo.create({
+                const infoJson = JSON.parse(info);
+                infoJson.forEach(i => DeviceInfo.create({
                     title: i.title,
                     description: i.description,
                     deviceId: device.id
@@ -111,6 +111,33 @@ class DeviceController {
             return res.status(200).send('Successfuly deleted device');
         } catch (e) {
             return res.status(500).send({ message: 'There was an error deleting the device' });
+        }
+    }
+
+    async sendRate(req, res, next) {
+        try {
+            const { id, userId, rate } = req.body;
+            const user = await Rating.findOne({ where: { userId, DeviceId: id } });
+            if (user) {
+                throw new Error('You have already rated this product');
+            }
+
+            const device = await Device.findOne({ where: { id } });
+
+            const newRate = await Rating.create({
+                rate,
+                userId,
+                DeviceId: id,
+            });
+
+            const allRates = await Rating.count({ where: { DeviceId: id } });
+            const totalRate = Math.round((device.rating + rate) / allRates);
+            device.rating = totalRate;
+            await device.save();
+
+            return res.json(totalRate);
+        } catch (err) {
+            next(ApiError.badRequest(err.message));
         }
     }
 }
