@@ -35,3 +35,9 @@ export const refineInput = (input) => {
     const currentInput = input.replace(/\s\s+/g, ' ').trim();
     return currentInput;
 };
+
+export const priceFormatter = new Intl.NumberFormat('ru', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+});

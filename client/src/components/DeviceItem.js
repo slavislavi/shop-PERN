@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { Card, Col, Image } from 'react-bootstrap';
 import { DEVICE_ROUTE } from '../utils/constants';
+import { priceFormatter } from '../utils/helpers';
 import star from '../assets/star.png';
 
 const DeviceItem = ({ device }) => {
@@ -24,7 +25,7 @@ const DeviceItem = ({ device }) => {
                     </div>
                 </div>
                 <div>{device.name}</div>
-                <div className="device-price">{device.price} $</div>
+                <div className="device-price">{priceFormatter.format(device.price)}</div>
             </Card>
         </Col>
     );

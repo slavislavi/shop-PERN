@@ -7,6 +7,7 @@ import cart from '../assets/cart.png';
 import { addToBasket, fetchOneDevice, getBasket } from '../http/deviceApi';
 import { notificationActions } from '../store/slices/notificationSlice';
 import { deviceActions } from '../store/slices/deviceSlice';
+import { priceFormatter } from '../utils/helpers';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({ info: [] });
@@ -37,13 +38,7 @@ const DevicePage = () => {
     useEffect(() => {
         fetchOneDevice(id).then((data) => {
             setDevice(data);
-            setPrice(
-                new Intl.NumberFormat('ru', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 2,
-                }).format(data.price)
-            );
+            setPrice(priceFormatter.format(data.price));
         });
     }, []);
 

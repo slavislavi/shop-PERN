@@ -6,6 +6,7 @@ import { deviceActions } from '../store/slices/deviceSlice';
 import { getBasketItems } from '../store/selectors/deviceSelectors';
 import { notificationActions } from '../store/slices/notificationSlice';
 import Checkbox from '../components/Checkbox';
+import { priceFormatter } from '../utils/helpers';
 import cart from '../assets/cart.png';
 
 const DISCOUNT = 5;
@@ -14,12 +15,6 @@ const Basket = () => {
     const [hasDiscount, setHasDiscount] = useState(false);
     const basketItems = useSelector(getBasketItems);
     const dispatch = useDispatch();
-
-    const formatter = new Intl.NumberFormat('ru', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2,
-    });
 
     const totalPrice = basketItems.reduce((acc, { device }) => acc + device.price, 0);
     const newPrice = Math.ceil(totalPrice - (totalPrice / 100 * DISCOUNT));
@@ -50,8 +45,10 @@ const Basket = () => {
             <div className="total-price-container">
                 <Image src={cart} width={60} height={60} />
                 <p className="basket-total-price">
-                    {basketItems.length} item{basketItems.length > 1 && "s"} worth: <span className={strikethroughPrice}>{formatter.format(totalPrice)}</span>
-                    {hasDiscount && <span className="price-with-discount">{formatter.format(newPrice)}</span>}
+                    {basketItems.length} item{basketItems.length > 1 && "s"} worth: <span className={strikethroughPrice}>{priceFormatter.format(totalPrice)}</span>
+                    {hasDiscount && <span className="price-with-discount">
+                        {priceFormatter.format(newPrice)}
+                    </span>}
                 </p>
             </div>
             <Checkbox
@@ -86,7 +83,9 @@ const Basket = () => {
                             </Col>
                             <Col md={2}>
                                 <div className="d-flex h-100 flex-row justify-content-end align-items-center">
-                                    <p className="basket-item-price">{formatter.format(device.price)}</p>
+                                    <p className="basket-item-price">
+                                        {priceFormatter.format(device.price)}
+                                    </p>
                                 </div>
                             </Col>
                         </Row>
