@@ -1,4 +1,4 @@
-import { $authHost, $host } from "./index";
+import { $authHost, $host } from './index';
 
 // TYPES
 
@@ -57,5 +57,17 @@ export const fetchOneDevice = async (id) => {
 
 export const deleteDevice = async (id) => {
     const { data } = await $authHost.delete(`api/device/${id}`);
+    return data;
+};
+
+// RATING
+
+export const addRating = async (body) => {
+    const { data } = await $authHost.post('api/rating', body);
+    return data;
+};
+
+export const checkRating = async (body) => {
+    const { data } = await $authHost.post('api/rating/check-rating', body);
     return data;
 };
