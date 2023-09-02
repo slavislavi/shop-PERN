@@ -6,8 +6,8 @@ export const registration = async (email, password) => {
         'api/user/registration',
         { email, password, role: 'USER' }
     );
-    localStorage.setItem('token', data.token);
-    return jwt_decode(data.token);
+    localStorage.setItem('token', data.accessToken);
+    return jwt_decode(data.refreshToken);
 };
 
 export const login = async (email, password) => {
@@ -15,16 +15,22 @@ export const login = async (email, password) => {
         'api/user/login',
         { email, password }
     );
-    localStorage.setItem('token', data.token);
-    return jwt_decode(data.token);
+    localStorage.setItem('token', data.accessToken);
+    return jwt_decode(data.refreshToken);
 };
 
 export const check = async () => {
     try {
-        const { data } = await $authHost.get('api/user/auth');
-        localStorage.setItem('token', data.token);
-        return jwt_decode(data.token);
+        const { data } = await $authHost.get('api/user/refresh');
+        localStorage.setItem('token', data.accessToken);
+        return { user: jwt_decode(data.refreshToken), basket: data.basket };
     } catch (e) {
         console.log('[http/userApi/check]:', e.response.data?.message);
     }
+};
+
+export const logout = async () => {
+    const res = await $authHost.post('api/user/logout');
+    localStorage.removeItem('token');
+    return res;
 };
