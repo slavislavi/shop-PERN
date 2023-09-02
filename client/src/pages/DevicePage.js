@@ -10,6 +10,7 @@ import { deviceActions } from '../store/slices/deviceSlice';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({ info: [] });
+    const [price, setPrice] = useState(0);
     const { id } = useParams();
     const dispatch = useDispatch();
 
@@ -34,7 +35,16 @@ const DevicePage = () => {
     };
 
     useEffect(() => {
-        fetchOneDevice(id).then((data) => setDevice(data));
+        fetchOneDevice(id).then((data) => {
+            setDevice(data);
+            setPrice(
+                new Intl.NumberFormat('ru', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2,
+                }).format(data.price)
+            );
+        });
     }, []);
 
     return (
@@ -62,7 +72,7 @@ const DevicePage = () => {
                         className="d-flex flex-column align-items-center justify-content-around"
                         style={{ width: 300, height: 300, fontSize: 32, border: "5px solid lightgray" }}
                     >
-                        <h3>{device.price} $</h3>
+                        <h3>{price}</h3>
                         <Row className="d-flex">
                             <Button
                                 variant="outline-dark"

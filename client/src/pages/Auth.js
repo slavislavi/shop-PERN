@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Card, Container, Form, Row, FloatingLabel } from 'react-bootstrap';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -46,6 +46,10 @@ const Auth = () => {
             }));
         }
     };
+
+    useEffect(() => {
+        document.title = 'Authorization';
+    }, []);
 
     return (
         <Container
