@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import bigStar from '../assets/bigStar.png';
 import cart from '../assets/cart.png';
-import { addToBasket, fetchOneDevice, getBasket } from '../http/deviceApi';
+import { addRating, addToBasket, checkRating, fetchOneDevice, getBasket } from '../http/deviceApi';
 import { notificationActions } from '../store/slices/notificationSlice';
 import { deviceActions } from '../store/slices/deviceSlice';
 import { priceFormatter } from '../utils/helpers';
+import { getIsAuth } from '../store/selectors/userSelectors';
+import RatingStars from '../components/RatingStars';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({ info: [] });
     const [price, setPrice] = useState(0);
+    const [resRate, setResRate] = useState('');
+    const [canRate, setCanRate] = useState(false);
+
+    const isAuth = useSelector(getIsAuth);
+
     const { id } = useParams();
     const dispatch = useDispatch();
 
@@ -35,12 +42,24 @@ const DevicePage = () => {
             .then((data) => dispatch(deviceActions.setBasketItems(data)));
     };
 
+    const onRatingChange = (rate) => {
+        addRating({
+            rate,
+            deviceId: id,
+        }).then((res) => {
+            setResRate(res);
+        });
+    };
+
     useEffect(() => {
         fetchOneDevice(id).then((data) => {
             setDevice(data);
             setPrice(priceFormatter.format(data.price));
         });
-    }, []);
+        if (isAuth) {
+            checkRating({ deviceId: id }).then((data) => setCanRate(data.allow));
+        }
+    }, [id, isAuth, resRate]); // maybe without resRate ?
 
     return (
         <Container className="page-container">
@@ -60,6 +79,13 @@ const DevicePage = () => {
                         >
                             {device.rating}
                         </div>
+                        <RatingStars
+                            onRatingChange={onRatingChange}
+                            ratingValue={device?.rating || 0}
+                            isAuth={isAuth}
+                            canRate={canRate}
+                        />
+                        {resRate}
                     </Row>
                 </Col>
                 <Col md={3}>
