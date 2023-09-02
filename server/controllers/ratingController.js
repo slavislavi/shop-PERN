@@ -27,10 +27,11 @@ class RatingController {
         try {
             const { deviceId } = req.body;
             const token = req.headers.authorization.split(' ')[1];
-            const user = jwt.verify(token, process.env.SECRET_KEY);
+            const user = jwt.verify(token, process.env.JWT_ACCESS);
             const checkRating = await Rating.findOne({
                 where: { deviceId, userId: user.id },
             });
+
             const checkDevices = await Device.findOne({ where: { id: deviceId } });
             if (!checkDevices) {
                 return res.json({ allow: false });
@@ -41,7 +42,7 @@ class RatingController {
         } catch (e) {
             return res
                 .status(401)
-                .json('Something going wrong in checkAddRatingMiddleware.js');
+                .json('Something went wrong in CheckAddRatingMiddleware');
         }
     }
 }
